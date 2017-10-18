@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
-    float xAxis;
-    float zAxis;
+    float v_xAxis;
+    float v_zAxis;
     [SerializeField]
-    private float movementSpeed;
+    private float v_movementSpeed;
 	
 	void Update()
     {
-        xAxis = Input.GetAxis("Horizontal") * Time.deltaTime * movementSpeed;
-        zAxis = Input.GetAxis("Vertical") * Time.deltaTime * movementSpeed;
+        v_xAxis = Input.GetAxis("Horizontal") * Time.deltaTime * v_movementSpeed;
+        v_zAxis = Input.GetAxis("Vertical") * Time.deltaTime * v_movementSpeed;
 
-        transform.Translate(xAxis, 0, zAxis);
+        transform.Translate(v_xAxis, 0, v_zAxis);
 	}
 }
