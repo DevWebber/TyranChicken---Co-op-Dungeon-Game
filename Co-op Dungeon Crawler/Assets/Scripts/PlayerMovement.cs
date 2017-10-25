@@ -4,30 +4,26 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class PlayerMovement : MonoBehaviour {
-
+    /// <summary>
+    /// Moves the player in 4 directions using the Unity Navigation Mesh
+    /// </summary>
     float v_xAxis;
     float v_zAxis;
     [SerializeField]
     private float v_movementSpeed;
 
-	NavMeshAgent agent;
+	NavMeshAgent playerAgent;
 
 	void Start()
 	{
-		agent = GetComponent<NavMeshAgent> ();
+        playerAgent = GetComponent<NavMeshAgent>();
 	}
 
 	void Update()
-    {
-
-		
+    {	
         v_xAxis = Input.GetAxis("Horizontal") * Time.deltaTime * v_movementSpeed;
         v_zAxis = Input.GetAxis("Vertical") * Time.deltaTime * v_movementSpeed;
 
-        agent.Move(new Vector3(v_xAxis, 0, v_zAxis));
-
-        /*
-        transform.Translate(v_xAxis, 0, v_zAxis);
-        */
+        playerAgent.Move(new Vector3(v_xAxis, 0, v_zAxis));
 	}
 }
