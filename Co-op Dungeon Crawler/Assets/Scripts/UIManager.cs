@@ -15,12 +15,17 @@ public class UIManager : MonoBehaviour {
     {
         PlayerBehaviour.OnSendHealthInfo += HandleOnUpdateHealth;
     }
-	void Start()
+	void OnDisable()
     {
         PlayerBehaviour.OnSendHealthInfo -= HandleOnUpdateHealth;
     }
-	
-	void Update()
+
+    void Start()
+    {
+        
+    }
+
+    void Update()
     {
 		
 	}

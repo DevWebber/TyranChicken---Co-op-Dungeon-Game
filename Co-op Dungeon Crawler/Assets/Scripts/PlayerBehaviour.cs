@@ -15,6 +15,8 @@ public class PlayerBehaviour : MonoBehaviour {
     private int playerHealth;
 
     private bool invulnerable;
+    private Material[] playerMaterial;
+    private Color playerColor;
 
     private void OnEnable()
     {
@@ -28,6 +30,15 @@ public class PlayerBehaviour : MonoBehaviour {
 
     void Start()
     {
+        invulnerable = false;
+        playerMaterial = new Material[transform.childCount - 1];
+
+        for (int i = 0; i < playerMaterial.Length; i++)
+        {
+            playerMaterial[i] = transform.GetChild(i).GetComponent<Renderer>().material;
+        }
+        playerColor = playerMaterial[0].color;
+
         SendHealthData();
 	}
 
@@ -38,7 +49,7 @@ public class PlayerBehaviour : MonoBehaviour {
             playerHealth -= damage;
 
             invulnerable = true;
-            transform.GetComponent<Material>().color = Color.red;
+            ChangeColor(Color.red);
 
             Invoke("ResetInvulnerable", 1.5f);
 
@@ -49,13 +60,16 @@ public class PlayerBehaviour : MonoBehaviour {
     private void ResetInvulnerable()
     {
         invulnerable = false;
-        transform.GetComponent<Material>().color = Color.blue;
+        ChangeColor(playerColor);
     }
 
-	void Update()
+    private void ChangeColor(Color colorToChange)
     {
-		
-	}
+        for (int i = 0; i < playerMaterial.Length; i++)
+        {
+            playerMaterial[i].color = colorToChange;
+        }
+    }
 
     void SendHealthData()
     {

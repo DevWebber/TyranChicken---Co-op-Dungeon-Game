@@ -10,7 +10,11 @@ public class PlayerMovement : MonoBehaviour {
     float v_xAxis;
     float v_zAxis;
     [SerializeField]
-    private float v_movementSpeed;
+    private float movementSpeed;
+    [SerializeField]
+    private float rotationSpeed;
+
+    Vector3 nextDirection;
 
 	NavMeshAgent playerAgent;
 
@@ -21,9 +25,21 @@ public class PlayerMovement : MonoBehaviour {
 
 	void Update()
     {	
-        v_xAxis = Input.GetAxis("Horizontal") * Time.deltaTime * v_movementSpeed;
-        v_zAxis = Input.GetAxis("Vertical") * Time.deltaTime * v_movementSpeed;
+        v_xAxis = Input.GetAxis("Horizontal") * Time.deltaTime * movementSpeed;
+        v_zAxis = Input.GetAxis("Vertical") * Time.deltaTime * movementSpeed;
 
         playerAgent.Move(new Vector3(v_xAxis, 0, v_zAxis));
+
+        nextDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+
+        if (nextDirection != Vector3.zero)
+        {
+            Quaternion newRotation = Quaternion.LookRotation(-nextDirection);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * rotationSpeed);
+
+            //transform.rotation = Quaternion.FromToRotation(transform.position, nextDirection);
+            
+        }
 	}
 }
