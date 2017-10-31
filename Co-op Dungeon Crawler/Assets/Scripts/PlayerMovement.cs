@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Networking;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : NetworkBehaviour {
     /// <summary>
     /// Moves the player in 4 directions using the Unity Navigation Mesh
     /// </summary>
@@ -30,6 +31,11 @@ public class PlayerMovement : MonoBehaviour {
 
 	void Update()
     {	
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
         v_xAxis = Input.GetAxis("Horizontal") * Time.deltaTime * movementSpeed;
         v_zAxis = Input.GetAxis("Vertical") * Time.deltaTime * movementSpeed;
 
@@ -63,6 +69,12 @@ public class PlayerMovement : MonoBehaviour {
             //This doesn't work yet, the idea is when the player stops moving the animation goes back to the beginning.
             playerAnim.Rewind("Player Walking");
         }
+    }
+
+    public override void OnStartLocalPlayer()
+    {
+        GetComponentInChildren<Renderer>().material.color = Color.red;
+        Camera.main.GetComponent<CameraFollow>().AssignTarget(transform);
     }
 }
 

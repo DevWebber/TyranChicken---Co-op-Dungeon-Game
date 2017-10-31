@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Networking;
 
-public class BasicEnemyBehaviour : MonoBehaviour {
+public class BasicEnemyBehaviour : NetworkBehaviour {
     /// <summary>
     /// Handles all the basic enemey behaviour, which just assumes all this guy wants to do is run at the player and touch them
     /// </summary>
-    [SerializeField]
+    [SerializeField][SyncVar]
     private int enemyHealth;
-    [SerializeField]
+    [SerializeField][SyncVar]
     private int enemyDamage;
 
     private bool invulnerable;
@@ -28,7 +29,15 @@ public class BasicEnemyBehaviour : MonoBehaviour {
     {
         enemyMaterial = new Material[transform.childCount];
         enemyAgent = GetComponent<NavMeshAgent>();
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+
+        if (!GameObject.FindGameObjectWithTag("Player"))
+        {
+
+        }
+        else
+        {
+            target = GameObject.FindGameObjectWithTag("Player").transform;
+        }
 
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -52,6 +61,10 @@ public class BasicEnemyBehaviour : MonoBehaviour {
             {
                 target.gameObject.GetComponent<PlayerBehaviour>().TakeDamage(enemyDamage);
             }
+        }
+        else if (GameObject.FindGameObjectWithTag("Player"))
+        {
+            target = GameObject.FindGameObjectWithTag("Player").transform;
         }
     }
 

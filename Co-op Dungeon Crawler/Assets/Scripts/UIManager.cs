@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class UIManager : MonoBehaviour {
+public class UIManager : NetworkBehaviour {
 
+    [SyncVar(hook = "HandleOnUpdateHealth")]
     private int player1Health;
 
     [SerializeField]

@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class PlayerBehaviour : MonoBehaviour {
+public class PlayerBehaviour : NetworkBehaviour {
     /// <summary>
     /// Controls the players behaviour, consisting of their health, attacking and interacting.
     /// </summary>
@@ -11,7 +12,7 @@ public class PlayerBehaviour : MonoBehaviour {
     public delegate void SendHealthInfo(int health);
     public static event SendHealthInfo OnSendHealthInfo;
 
-    [SerializeField]
+    [SerializeField][SyncVar]
     private int playerHealth;
 
     private bool invulnerable;
@@ -54,10 +55,14 @@ public class PlayerBehaviour : MonoBehaviour {
 
     void Update()
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            playerAnim.Blend("Sword Attack");
-            isAnimPlaying = playerAnim.isPlaying;
+            CmdStartAttack();
         }
     }
 
@@ -69,19 +74,45 @@ public class PlayerBehaviour : MonoBehaviour {
         }
     }
 
+    [Command]
+    void CmdStartAttack()
+    {
+        RpcAttack();
+    }
+
+    [ClientRpc]
+    void RpcAttack()
+    {
+        playerAnim.Blend("Sword Attack");
+        isAnimPlaying = playerAnim.isPlaying;
+    }
+
     public void TakeDamage(int damage)
     {
         //Invulnerability means the player doesn't constantly take damage when next to an enemy
+        if (!isServer)
+        {
+            return;
+        }
+
         if (!invulnerable)
         {
             playerHealth -= damage;
 
-            invulnerable = true;
-            ChangeColor(Color.red);
+            if (playerHealth <= 0)
+            {
+                RpcRespawn();
+            }
+            else
+            {
 
-            Invoke("ResetInvulnerable", 1.5f);
+                invulnerable = true;
+                ChangeColor(Color.red);
 
-            SendHealthData();
+                Invoke("ResetInvulnerable", 1.5f);
+
+                SendHealthData();
+            }
         }
     }
 
@@ -92,6 +123,15 @@ public class PlayerBehaviour : MonoBehaviour {
         ChangeColor(playerColor);
     }
 
+    [ClientRpc]
+    void RpcRespawn()
+    {
+        if (isLocalPlayer)
+        {
+            playerHealth = 100;
+            transform.position = Vector3.zero;
+        }
+    }
     //Helper method to change all parts of the player to a certain color.
     private void ChangeColor(Color colorToChange)
     {
