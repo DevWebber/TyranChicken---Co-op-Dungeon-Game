@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour {
     private int player1Health;
 
     [SerializeField]
-    private Text healthText;
+    private Slider healthText;
 
 
     void OnEnable()
@@ -30,9 +30,10 @@ public class UIManager : MonoBehaviour {
 		
 	}
 
+    //Takes player health and displays it as a health bar
     private void HandleOnUpdateHealth(int health)
     {
         player1Health = health;
-        healthText.text = "Health: " + player1Health;
+        healthText.value = (float) player1Health / 100;
     }
 }

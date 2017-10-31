@@ -17,6 +17,13 @@ public class PlayerBehaviour : MonoBehaviour {
     private bool invulnerable;
     private Material[] playerMaterial;
     private Color playerColor;
+    private Animation playerAnim;
+    private bool isAnimPlaying;
+
+    public bool IsAnimationPlaying
+    {
+        get { return isAnimPlaying; }
+    }
 
     private void OnEnable()
     {
@@ -31,6 +38,8 @@ public class PlayerBehaviour : MonoBehaviour {
     void Start()
     {
         invulnerable = false;
+        playerAnim = GetComponent<Animation>();
+        //This lets us control the material of the player. Later on this will be more efficient.
         playerMaterial = new Material[transform.childCount - 1];
 
         for (int i = 0; i < playerMaterial.Length; i++)
@@ -39,11 +48,30 @@ public class PlayerBehaviour : MonoBehaviour {
         }
         playerColor = playerMaterial[0].color;
 
+        //Initially sends the health of the player to whatever is keeping an eye on it
         SendHealthData();
 	}
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            playerAnim.Blend("Sword Attack");
+            isAnimPlaying = playerAnim.isPlaying;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (playerAnim.isPlaying == false)
+        {
+            isAnimPlaying = false;
+        }
+    }
+
     public void TakeDamage(int damage)
     {
+        //Invulnerability means the player doesn't constantly take damage when next to an enemy
         if (!invulnerable)
         {
             playerHealth -= damage;
@@ -57,12 +85,14 @@ public class PlayerBehaviour : MonoBehaviour {
         }
     }
 
+    //Resets the invulnerability state
     private void ResetInvulnerable()
     {
         invulnerable = false;
         ChangeColor(playerColor);
     }
 
+    //Helper method to change all parts of the player to a certain color.
     private void ChangeColor(Color colorToChange)
     {
         for (int i = 0; i < playerMaterial.Length; i++)
@@ -71,6 +101,7 @@ public class PlayerBehaviour : MonoBehaviour {
         }
     }
 
+    //Sends the health value to any listeners who might want it
     void SendHealthData()
     {
         if (OnSendHealthInfo != null)

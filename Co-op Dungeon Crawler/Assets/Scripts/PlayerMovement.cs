@@ -15,12 +15,17 @@ public class PlayerMovement : MonoBehaviour {
     private float rotationSpeed;
 
     Vector3 nextDirection;
+    private Animation playerAnim;
+    private bool playerWalking;
 
 	NavMeshAgent playerAgent;
 
 	void Start()
 	{
         playerAgent = GetComponent<NavMeshAgent>();
+        playerAnim = GetComponent<Animation>();
+
+        playerWalking = false;
 	}
 
 	void Update()
@@ -42,4 +47,23 @@ public class PlayerMovement : MonoBehaviour {
             
         }
 	}
+
+    void LateUpdate()
+    {
+        //This starts and stops the animation when the player is moving.
+        if (Vector3.Distance(nextDirection, Vector3.zero) > 0.1f && !playerWalking)
+        {
+            playerAnim.Blend("Player Walking");
+            playerWalking = true;
+        }
+        else if (Vector3.Distance(nextDirection, Vector3.zero) < 0.1f && playerWalking)
+        {
+            playerAnim.Stop("Player Walking");
+            playerWalking = false;
+            //This doesn't work yet, the idea is when the player stops moving the animation goes back to the beginning.
+            playerAnim.Rewind("Player Walking");
+        }
+    }
 }
+
+
