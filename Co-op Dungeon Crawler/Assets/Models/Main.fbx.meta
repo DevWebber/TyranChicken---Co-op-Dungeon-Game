@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: b46c7822fd9b358499461f2ad737b2cd
-timeCreated: 1509463202
+guid: dabbec599451c1643ad588937a9df8e4
+timeCreated: 1509464261
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -9,11 +9,11 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Plane
+    4300000: Cube
   materials:
     importMaterials: 1
     materialName: 0
-    materialSearch: 0
+    materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
