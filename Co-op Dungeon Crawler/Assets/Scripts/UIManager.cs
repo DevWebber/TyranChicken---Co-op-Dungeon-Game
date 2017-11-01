@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 public class UIManager : NetworkBehaviour {
 
     [SyncVar(hook = "HandleOnUpdateHealth")]
-    private int player1Health;
+    public int player1Health;
 
     [SerializeField]
     private Slider healthText;

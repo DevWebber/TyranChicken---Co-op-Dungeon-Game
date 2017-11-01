@@ -73,7 +73,7 @@ public class PlayerMovement : NetworkBehaviour {
 
     public override void OnStartLocalPlayer()
     {
-        GetComponentInChildren<Renderer>().material.color = Color.red;
+        transform.Find("Hat").gameObject.SetActive(true);
         Camera.main.GetComponent<CameraFollow>().AssignTarget(transform);
     }
 }

@@ -14,6 +14,7 @@ public class PlayerBehaviour : NetworkBehaviour {
 
     [SerializeField][SyncVar]
     private int playerHealth;
+    private string[] playerBodyParts;
 
     private bool invulnerable;
     private Material[] playerMaterial;
@@ -40,12 +41,13 @@ public class PlayerBehaviour : NetworkBehaviour {
     {
         invulnerable = false;
         playerAnim = GetComponent<Animation>();
+        playerBodyParts = new string[] { "Head", "Body", "LeftArm", "RightArm", "LeftLeg", "RightLeg" };
         //This lets us control the material of the player. Later on this will be more efficient.
-        playerMaterial = new Material[transform.childCount - 1];
+        playerMaterial = new Material[playerBodyParts.Length];
 
         for (int i = 0; i < playerMaterial.Length; i++)
         {
-            playerMaterial[i] = transform.GetChild(i).GetComponent<Renderer>().material;
+            playerMaterial[i] = transform.Find(playerBodyParts[i]).GetComponent<Renderer>().material;
         }
         playerColor = playerMaterial[0].color;
 

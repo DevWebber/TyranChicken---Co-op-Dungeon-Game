@@ -55,6 +55,7 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
 		if (target != null)
         {
             enemyAgent.SetDestination(target.position);
+            enemyAgent.speed = 5f;
 
             //If the player is right next to the enemy, keep taking damage. Change this if we move away from colliders
             if (enemyAgent.remainingDistance < 2f && hasCollided)
