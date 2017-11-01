@@ -44,6 +44,8 @@ public class CameraFollow : MonoBehaviour {
             //Casts a raycast to hit from the camera to the player.
             rayHits = Physics.RaycastAll(transform.position, playerDirection, playerDistance, layerMask);
 
+            Debug.DrawRay(transform.position, playerDirection, Color.red);
+
             //Checks all the raycast hits on walls
             for (int i = 0; i < rayHits.Length; i++)
             {
@@ -85,7 +87,7 @@ public class CameraFollow : MonoBehaviour {
                 }
             }
         }
-	}
+    }
 
     public void AssignTarget(Transform target)
     {
