@@ -12,7 +12,7 @@ public class PlayerBehaviour : NetworkBehaviour {
     public delegate void SendHealthInfo(int health);
     public static event SendHealthInfo OnSendHealthInfo;
 
-    [SerializeField][SyncVar]
+    [SerializeField][SyncVar(hook ="OnChangeHealth")]
     private int playerHealth;
     private string[] playerBodyParts;
 
@@ -70,6 +70,11 @@ public class PlayerBehaviour : NetworkBehaviour {
 
     void FixedUpdate()
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
         if (playerAnim.isPlaying == false)
         {
             isAnimPlaying = false;
@@ -112,8 +117,6 @@ public class PlayerBehaviour : NetworkBehaviour {
                 ChangeColor(Color.red);
 
                 Invoke("ResetInvulnerable", 1.5f);
-
-                SendHealthData();
             }
         }
     }
@@ -150,5 +153,16 @@ public class PlayerBehaviour : NetworkBehaviour {
         {
             OnSendHealthInfo(playerHealth);
         }
+    }
+
+    void OnChangeHealth(int health)
+    {
+        playerHealth = health;
+        SendHealthData();
+    }
+
+    public override void OnStartClient()
+    {
+        SendHealthData();
     }
 }
