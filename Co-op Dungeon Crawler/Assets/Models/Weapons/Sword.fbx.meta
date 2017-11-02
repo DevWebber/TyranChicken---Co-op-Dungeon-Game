@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: c44bd829e3d102e419e72f2efa41642c
-timeCreated: 1509530729
-licenseType: Pro
+guid: 73322b91e00b6984b949f02ed2f275cd
+timeCreated: 1509575671
+licenseType: Free
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
@@ -19,7 +19,7 @@ ModelImporter:
     4300000: Cube
     10800000: Lamp
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:

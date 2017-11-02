@@ -123,7 +123,7 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
 
             if (enemyHealth <= 0)
             {
-                Death();
+                CmdDeath();
             }
             else
             {
@@ -143,7 +143,8 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
     }
 
     //A very crude way of doing it, this will improve later on.
-    private void Death()
+    [Command]
+    private void CmdDeath()
     {
         Destroy(gameObject);
     }

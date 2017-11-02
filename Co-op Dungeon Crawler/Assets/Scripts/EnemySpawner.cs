@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class EnemySpawner : NetworkBehaviour {
-
+    /// <summary>
+    /// Simple class to spawn a desired enemy any number of times
+    /// </summary>
     [SerializeField]
     private GameObject enemyPrefab;
     [SerializeField]
@@ -15,7 +17,10 @@ public class EnemySpawner : NetworkBehaviour {
     private GameObject tempEnemy;
 
     private bool notSpawned = false;
+    private int maxAmountToSpawn = 10;
+    private int numberSpawned;
 
+    //At the server start, spawn some enemies.
 	public override void OnStartServer()
     {
         SpawnEnemies();
@@ -23,7 +28,8 @@ public class EnemySpawner : NetworkBehaviour {
 
     void FixedUpdate()
     {
-        if (notSpawned)
+        //Checks to see if the cooldown is off and if the fixed amount has already spawned
+        if (notSpawned && numberSpawned < maxAmountToSpawn)
         {
             Invoke("SpawnEnemies", 1f);
             notSpawned = false;
@@ -38,10 +44,12 @@ public class EnemySpawner : NetworkBehaviour {
             spawnRotation = Quaternion.Euler(0.0f, Random.Range(0, 180f), 0.0f);
 
             tempEnemy = Instantiate(enemyPrefab, spawnPosition, spawnRotation);
+            //Calls for the network to spawn them, so they are tracked server side
             NetworkServer.Spawn(tempEnemy);
         }
 
         Invoke("SpawnCooldown", 10f);
+        numberSpawned++;
     }
 
     private void SpawnCooldown()

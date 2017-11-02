@@ -503,7 +503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14d42d42fcf68424dab235a843394be8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: 5
+  enemyHealth: 3
   enemyDamage: 5
 --- !u!114 &114544747930014968
 MonoBehaviour:
