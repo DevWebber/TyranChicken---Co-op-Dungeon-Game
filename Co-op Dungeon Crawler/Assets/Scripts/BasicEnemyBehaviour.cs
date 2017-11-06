@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Networking;
 
-public class BasicEnemyBehaviour : MonoBehaviour {
+public class BasicEnemyBehaviour : NetworkBehaviour {
     /// <summary>
     /// Handles all the basic enemey behaviour, which just assumes all this guy wants to do is run at the player and touch them
     /// </summary>
-    [SerializeField]
+    [SerializeField][SyncVar]
     private int enemyHealth;
-    [SerializeField]
+    [SerializeField][SyncVar]
     private int enemyDamage;
 
     private bool invulnerable;
@@ -28,7 +29,15 @@ public class BasicEnemyBehaviour : MonoBehaviour {
     {
         enemyMaterial = new Material[transform.childCount];
         enemyAgent = GetComponent<NavMeshAgent>();
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+
+        if (!GameObject.FindGameObjectWithTag("Player"))
+        {
+
+        }
+        else
+        {
+            target = GameObject.FindGameObjectWithTag("Player").transform;
+        }
 
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -46,12 +55,17 @@ public class BasicEnemyBehaviour : MonoBehaviour {
 		if (target != null)
         {
             enemyAgent.SetDestination(target.position);
+            enemyAgent.speed = 5f;
 
             //If the player is right next to the enemy, keep taking damage. Change this if we move away from colliders
             if (enemyAgent.remainingDistance < 2f && hasCollided)
             {
                 target.gameObject.GetComponent<PlayerBehaviour>().TakeDamage(enemyDamage);
             }
+        }
+        else if (GameObject.FindGameObjectWithTag("Player"))
+        {
+            target = GameObject.FindGameObjectWithTag("Player").transform;
         }
     }
 
@@ -109,7 +123,7 @@ public class BasicEnemyBehaviour : MonoBehaviour {
 
             if (enemyHealth <= 0)
             {
-                Death();
+                CmdDeath();
             }
             else
             {
@@ -129,7 +143,8 @@ public class BasicEnemyBehaviour : MonoBehaviour {
     }
 
     //A very crude way of doing it, this will improve later on.
-    private void Death()
+    [Command]
+    private void CmdDeath()
     {
         Destroy(gameObject);
     }

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class UIManager : MonoBehaviour {
+public class UIManager : NetworkBehaviour {
 
-    private int player1Health;
+    [SyncVar(hook = "HandleOnUpdateHealth")]
+    public int player1Health;
 
     [SerializeField]
     private Slider healthText;
