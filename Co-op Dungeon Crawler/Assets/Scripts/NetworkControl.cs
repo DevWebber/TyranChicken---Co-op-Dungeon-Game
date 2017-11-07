@@ -27,7 +27,7 @@ public class NetworkControl : NetworkLobbyManager
     {
         for (int i = 0; i < lobbySlots.Length; i++)
         {
-            NetworkLobbyPlayer networkLobbyPlayer = lobbySlots[i];
+            UnityEngine.Networking.NetworkLobbyPlayer networkLobbyPlayer = lobbySlots[i];
             if (!(networkLobbyPlayer == null))
             {
                 if (networkLobbyPlayer.connectionToClient == conn)
@@ -38,5 +38,24 @@ public class NetworkControl : NetworkLobbyManager
             }
         }
         OnLobbyServerDisconnect(conn);
+    }
+
+    public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
+    {
+        base.OnServerAddPlayer(conn, playerControllerId);
+
+    }
+
+    public override void OnStopServer()
+    {
+        base.OnStopServer();
+    }
+
+    public override void OnServerSceneChanged(string sceneName)
+    {
+        base.OnServerSceneChanged(sceneName);
+
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 }

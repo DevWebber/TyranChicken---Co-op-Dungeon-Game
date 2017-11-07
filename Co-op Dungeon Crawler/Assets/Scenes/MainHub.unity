@@ -1456,59 +1456,10 @@ Prefab:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1199925807934938, guid: 4268cc43f879a4c40bb793d18fca668e, type: 2}
-      propertyPath: m_IsActive
-      value: 1
+      propertyPath: m_Name
+      value: LobbyArtifact
       objectReference: {fileID: 0}
-    - target: {fileID: 23604832749645210, guid: 4268cc43f879a4c40bb793d18fca668e,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 23051329846801250, guid: 4268cc43f879a4c40bb793d18fca668e,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 23077441836067896, guid: 4268cc43f879a4c40bb793d18fca668e,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 23165167578534610, guid: 4268cc43f879a4c40bb793d18fca668e,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 23789688731649276, guid: 4268cc43f879a4c40bb793d18fca668e,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 23306628279888172, guid: 4268cc43f879a4c40bb793d18fca668e,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 23856832111663048, guid: 4268cc43f879a4c40bb793d18fca668e,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 23579647872177496, guid: 4268cc43f879a4c40bb793d18fca668e,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 23463180539994014, guid: 4268cc43f879a4c40bb793d18fca668e,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114063231880943044, guid: 4268cc43f879a4c40bb793d18fca668e, type: 2}
-    - {fileID: 114101036008601200, guid: 4268cc43f879a4c40bb793d18fca668e, type: 2}
-    - {fileID: 114341341592289890, guid: 4268cc43f879a4c40bb793d18fca668e, type: 2}
-    - {fileID: 195513244845215028, guid: 4268cc43f879a4c40bb793d18fca668e, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4268cc43f879a4c40bb793d18fca668e, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &170922285
@@ -2586,6 +2537,28 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 80555c0d65fa7f04c9d05051bd8dd8c0, type: 3}
   m_PrefabInternal: {fileID: 305646837}
+--- !u!1 &315255741 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1199925807934938, guid: 4268cc43f879a4c40bb793d18fca668e,
+    type: 2}
+  m_PrefabInternal: {fileID: 170839609}
+--- !u!114 &315255746 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114654611800131630, guid: 4268cc43f879a4c40bb793d18fca668e,
+    type: 2}
+  m_PrefabInternal: {fileID: 170839609}
+  m_Script: {fileID: 246975512, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+--- !u!114 &315255747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 315255741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72433c87cf2737240bb38bb7a4e99894, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &339257812
 Prefab:
   m_ObjectHideFlags: 0
@@ -5172,7 +5145,7 @@ PlayableDirector:
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 929271cea5cee0c47bfc0dfb863a6c6c, type: 2}
   m_InitialState: 1
-  m_WrapMode: 2
+  m_WrapMode: 1
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
@@ -6192,12 +6165,6 @@ Transform:
   m_Father: {fileID: 806959460}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &854551940 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114232438125837672, guid: 4268cc43f879a4c40bb793d18fca668e,
-    type: 2}
-  m_PrefabInternal: {fileID: 170839609}
-  m_Script: {fileID: 246975512, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
 --- !u!1 &857379815 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 80555c0d65fa7f04c9d05051bd8dd8c0, type: 3}
@@ -13197,6 +13164,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1775513026}
+  - component: {fileID: 1775513028}
+  - component: {fileID: 1775513027}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -13218,6 +13187,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1775513027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1775513025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3960c7deec1d2a54bbf3bc7c03710622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1775513028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1775513025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0
 --- !u!1 &1782302799
 GameObject:
   m_ObjectHideFlags: 0
@@ -15185,14 +15197,14 @@ MonoBehaviour:
   m_RunInBackground: 1
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
-  m_LogLevel: 2
+  m_LogLevel: 5
   m_PlayerPrefab: {fileID: 0}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 0
   m_OfflineScene: MainHub
   m_OnlineScene: 
   m_SpawnPrefabs:
-  - {fileID: 1842764527218776, guid: 43f7f9ebeb2bcb540a490e51d7e63496, type: 2}
+  - {fileID: 0}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -15244,7 +15256,7 @@ MonoBehaviour:
   m_AllowFragmentation: 1
   m_MatchHost: mm.unet.unity3d.com
   m_MatchPort: 443
-  matchName: default
+  matchName: Chicken
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
@@ -15252,7 +15264,7 @@ MonoBehaviour:
   m_MaxPlayers: 4
   m_MaxPlayersPerConnection: 1
   m_MinPlayers: 0
-  m_LobbyPlayerPrefab: {fileID: 854551940}
+  m_LobbyPlayerPrefab: {fileID: 315255746}
   m_GamePlayerPrefab: {fileID: 1377681128473128, guid: 1777c013eaa9aa841b00e327818a32c1,
     type: 2}
   m_LobbyScene: MainHub

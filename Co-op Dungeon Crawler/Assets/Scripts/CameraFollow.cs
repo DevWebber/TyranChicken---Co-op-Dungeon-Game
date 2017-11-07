@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class CameraFollow : MonoBehaviour {
+public class CameraFollow : NetworkBehaviour {
     /// <summary>
     /// This class controls all the camera based mechancis. This includes the following of the player
     /// and also the hiding of objects that are in the cameras way of the view to the player (mainly walls and corridors)
     /// </summary>
+    
+    [SerializeField]
     private Transform playerTarget;
 
     [SerializeField]
@@ -91,4 +94,5 @@ public class CameraFollow : MonoBehaviour {
     {
         playerTarget = target;
     }
+
 }

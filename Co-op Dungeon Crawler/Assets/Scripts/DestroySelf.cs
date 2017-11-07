@@ -1,11 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
-public class LobbyUI : NetworkManagerHUD {
-
-
-     
+public class DestroySelf : MonoBehaviour {
 
 }

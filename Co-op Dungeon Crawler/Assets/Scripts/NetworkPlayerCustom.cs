@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class NetworkPlayer : NetworkBehaviour {
+public class NetworkPlayerCustom : NetworkBehaviour {
 
     [SyncVar(hook = "OnPlayerIDChanged")]
     public string playerID;

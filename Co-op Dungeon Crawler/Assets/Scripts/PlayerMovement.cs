@@ -97,10 +97,8 @@ public class PlayerMovement : NetworkBehaviour {
     public override void OnStartLocalPlayer()
     {
         transform.Find("Hat").gameObject.SetActive(true);
-        if (SceneManager.GetActiveScene().name != "MainHub")
-        {
-            Camera.main.GetComponent<CameraFollow>().AssignTarget(transform);
-        } 
+
+        Camera.main.GetComponent<CameraFollow>().AssignTarget(transform);
     }
 
 }
