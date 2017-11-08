@@ -14,7 +14,15 @@ public class NetworkControl : NetworkLobbyManager
 
     public override void ServerChangeScene(string sceneName)
     {
+        Debug.Log("ChangeScene");
         SceneManager.LoadScene(sceneName);
+
+        Invoke("SpawnObjects", 0.2f);
+    }
+
+    public void SpawnObjects()
+    {
+        NetworkServer.SpawnObjects();
     }
 
     public override void OnLobbyClientDisconnect(NetworkConnection conn)
@@ -53,9 +61,10 @@ public class NetworkControl : NetworkLobbyManager
 
     public override void OnServerSceneChanged(string sceneName)
     {
-        base.OnServerSceneChanged(sceneName);
-
+        Debug.Log("ServerChangeSceneCalled");
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
+
+        NetworkServer.SpawnObjects();
     }
 }

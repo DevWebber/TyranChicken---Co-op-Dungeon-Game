@@ -16,6 +16,8 @@ public class CameraFollow : NetworkBehaviour {
     private float yOffset;
     [SerializeField]
     private float zOffset;
+    [SerializeField]
+    private float cameraAngle;
 
     //Direction and Distance from camera to player. Used for the raycast
     private Vector3 playerDirection;
@@ -39,7 +41,7 @@ public class CameraFollow : NetworkBehaviour {
         {
             //Updates the positon of the camera to always be above the player at an offset.
             transform.position = new Vector3(playerTarget.position.x, yOffset, playerTarget.position.z - zOffset);
-            transform.rotation = Quaternion.Euler(45, 0, 0);
+            transform.rotation = Quaternion.Euler(cameraAngle, 0, 0);
 
             playerDirection = playerTarget.position - transform.position;
             playerDistance = playerDirection.magnitude;
