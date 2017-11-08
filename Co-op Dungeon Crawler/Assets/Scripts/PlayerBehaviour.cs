@@ -14,6 +14,9 @@ public class PlayerBehaviour : NetworkBehaviour {
 
     [SerializeField][SyncVar(hook ="OnChangeHealth")]
     private int playerHealth;
+    [SerializeField]
+    private int playerDamage;
+
     private string[] playerBodyParts;
 
     private bool invulnerable;
@@ -27,16 +30,10 @@ public class PlayerBehaviour : NetworkBehaviour {
         get { return isAnimPlaying; }
     }
 
-    private void OnEnable()
+    public int PlayerDamage
     {
-        
+        get { return playerDamage; }
     }
-
-    private void OnDisable()
-    {
-        
-    }
-
     void Start()
     {
         invulnerable = false;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : NetworkBehaviour {
     /// <summary>
@@ -96,8 +97,10 @@ public class PlayerMovement : NetworkBehaviour {
     public override void OnStartLocalPlayer()
     {
         transform.Find("Hat").gameObject.SetActive(true);
+
         Camera.main.GetComponent<CameraFollow>().AssignTarget(transform);
     }
+
 }
 
 

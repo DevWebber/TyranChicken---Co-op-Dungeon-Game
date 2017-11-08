@@ -1,18 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class CameraFollow : MonoBehaviour {
+public class CameraFollow : NetworkBehaviour {
     /// <summary>
     /// This class controls all the camera based mechancis. This includes the following of the player
     /// and also the hiding of objects that are in the cameras way of the view to the player (mainly walls and corridors)
     /// </summary>
+    
+    [SerializeField]
     private Transform playerTarget;
 
     [SerializeField]
     private float yOffset;
     [SerializeField]
     private float zOffset;
+    [SerializeField]
+    private float cameraAngle;
 
     //Direction and Distance from camera to player. Used for the raycast
     private Vector3 playerDirection;
@@ -36,7 +41,7 @@ public class CameraFollow : MonoBehaviour {
         {
             //Updates the positon of the camera to always be above the player at an offset.
             transform.position = new Vector3(playerTarget.position.x, yOffset, playerTarget.position.z - zOffset);
-            transform.rotation = Quaternion.Euler(45, 0, 0);
+            transform.rotation = Quaternion.Euler(cameraAngle, 0, 0);
 
             playerDirection = playerTarget.position - transform.position;
             playerDistance = playerDirection.magnitude;
@@ -91,4 +96,5 @@ public class CameraFollow : MonoBehaviour {
     {
         playerTarget = target;
     }
+
 }

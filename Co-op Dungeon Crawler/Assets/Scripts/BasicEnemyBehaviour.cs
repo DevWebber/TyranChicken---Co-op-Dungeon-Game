@@ -16,6 +16,8 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
     private bool invulnerable;
     private bool hasCollided;
 
+    private Transform[] PlayerLocations;
+
     private Transform target;
     private Material[] enemyMaterial;
     private Color enemyColor;
@@ -30,13 +32,12 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
         enemyMaterial = new Material[transform.childCount];
         enemyAgent = GetComponent<NavMeshAgent>();
 
-        if (!GameObject.FindGameObjectWithTag("Player"))
-        {
+        int clientLength = FindObjectOfType<NetworkManager>().client.connection.playerControllers.Count;
+        PlayerLocations = new Transform[clientLength];
 
-        }
-        else
+        for (int i = 0; i < clientLength;  i++)
         {
-            target = GameObject.FindGameObjectWithTag("Player").transform;
+            PlayerLocations[i] = FindObjectOfType<NetworkManager>().client.connection.playerControllers[i].gameObject.transform;
         }
 
         for (int i = 0; i < transform.childCount; i++)
@@ -52,7 +53,12 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
 	//Ensures the enemy has a constant target
 	void FixedUpdate()
     {
-		if (target != null)
+        if (PlayerLocations != null)
+        {
+            target = FindClosestPlayer();
+        }
+
+        if (target != null)
         {
             enemyAgent.SetDestination(target.position);
             enemyAgent.speed = 5f;
@@ -63,11 +69,30 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
                 target.gameObject.GetComponent<PlayerBehaviour>().TakeDamage(enemyDamage);
             }
         }
-        else if (GameObject.FindGameObjectWithTag("Player"))
-        {
-            target = GameObject.FindGameObjectWithTag("Player").transform;
-        }
     }
+
+    private Transform FindClosestPlayer()
+    {
+        Transform closestPlayer;
+        float tempDistance;
+        float closestDistance;
+
+        closestDistance = Vector3.Distance(transform.position, PlayerLocations[0].transform.position);
+        closestPlayer = PlayerLocations[0];
+
+        for (int i = 0; i < PlayerLocations.Length; i++)
+        {
+            tempDistance = Vector3.Distance(transform.position, PlayerLocations[i].transform.position);
+
+            if (tempDistance > closestDistance)
+            {
+                closestPlayer = PlayerLocations[i];
+            }
+        }
+
+        return closestPlayer;
+    }
+ 
 
     //Handles the enemy touching the player. Later on this will be done by an attacking animation
     private void OnCollisionEnter(Collision collision)
@@ -90,7 +115,7 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
 
             if (tempBehaviour.IsAnimationPlaying)
             {
-                TakeDamage(1);
+                TakeDamage(tempBehaviour.PlayerDamage);
             }
 
             isColliding = true;

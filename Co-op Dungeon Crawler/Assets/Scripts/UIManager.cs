@@ -22,20 +22,16 @@ public class UIManager : NetworkBehaviour {
         PlayerBehaviour.OnSendHealthInfo -= HandleOnUpdateHealth;
     }
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-		
-	}
-
     //Takes player health and displays it as a health bar
     private void HandleOnUpdateHealth(int health)
     {
         player1Health = health;
         healthText.value = (float) player1Health / 100;
+    }
+
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+        NetworkServer.SpawnObjects();
     }
 }
