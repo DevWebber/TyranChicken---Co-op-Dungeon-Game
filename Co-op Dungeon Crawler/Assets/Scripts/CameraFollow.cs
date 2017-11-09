@@ -92,6 +92,7 @@ public class CameraFollow : NetworkBehaviour {
         }
     }
 
+    //When this is called, set the target of the camera to whatever is sent through.
     public void AssignTarget(Transform target)
     {
         playerTarget = target;
