@@ -18,6 +18,7 @@ public class PlayerBehaviour : NetworkBehaviour {
     private int playerDamage;
 
     private string[] playerBodyParts;
+    private string playerID;
 
     private bool invulnerable;
     private Material[] playerMaterial;

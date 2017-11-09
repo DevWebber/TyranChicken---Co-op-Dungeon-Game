@@ -5,6 +5,9 @@ using UnityEngine.Networking;
 
 public class NetworkPlayerCustom : NetworkBehaviour {
 
+    public delegate void SendPlayerID(string id);
+    public static event SendPlayerID OnSendPlayerID;
+
     [SyncVar(hook = "OnPlayerIDChanged")]
     public string playerID;
     private Transform labelHolder;
@@ -42,5 +45,6 @@ public class NetworkPlayerCustom : NetworkBehaviour {
     {
         string localPlayerID = string.Format("Player " + netId.Value);
         CmdSetPlayerID(localPlayerID);
+        OnSendPlayerID(localPlayerID);
     }
 }

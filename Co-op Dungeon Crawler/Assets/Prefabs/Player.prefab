@@ -867,6 +867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: 100
+  playerDamage: 1
 --- !u!114 &114536297911144614
 MonoBehaviour:
   m_ObjectHideFlags: 1
