@@ -60,7 +60,7 @@ public class PlayerMovement : NetworkBehaviour {
         playerRotationAngle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
 
         //How does this even work I don't know, please don't question it is just does.
-        transform.rotation = Quaternion.Euler(new Vector3(0, -playerRotationAngle - 90f, 0));
+        transform.rotation = Quaternion.Euler(new Vector3(0, -playerRotationAngle - 270f, 0));
 
 
 
