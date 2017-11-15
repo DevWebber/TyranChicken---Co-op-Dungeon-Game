@@ -25,7 +25,7 @@ public class PlayerBehaviour : NetworkBehaviour {
 
     private bool invulnerable;
     //These two are for changing the player to red when they get hit
-    private Material[] playerMaterial;
+    private Renderer playerMaterial;
     private Color playerColor;
     //Animator and another bool to check if the animation is playing
     private Animator playerAnimator;
@@ -51,13 +51,14 @@ public class PlayerBehaviour : NetworkBehaviour {
         //
         //playerBodyParts = new string[] { "Head", "Body", "LeftArm", "RightArm", "LeftLeg", "RightLeg" };
         //This lets us control the material of the player. Later on this will be more efficient.
-        //playerMaterial = new Material[playerBodyParts.Length];
+        playerMaterial = new Renderer();
 
         // for (int i = 0; i < playerMaterial.Length; i++)
         // {
         //     playerMaterial[i] = transform.Find(playerBodyParts[i]).GetComponent<Renderer>().material;
         // }
-        //playerColor = playerMaterial[0].color;
+        playerMaterial = transform.GetComponentInChildren<Renderer>();
+        playerColor = playerMaterial.material.color;
 
         //Initially sends the health of the player to whatever is keeping an eye on it
         SendHealthData();
@@ -132,9 +133,8 @@ public class PlayerBehaviour : NetworkBehaviour {
             }
             else
             {
-
                 invulnerable = true;
-                //ChangeColor(Color.red);
+                ChangeColor(Color.red);
 
                 //After 1.5 seconds, allow the player to get hit again
                 Invoke("ResetInvulnerable", 1.5f);
@@ -146,7 +146,7 @@ public class PlayerBehaviour : NetworkBehaviour {
     private void ResetInvulnerable()
     {
         invulnerable = false;
-        //ChangeColor(playerColor);
+        ChangeColor(playerColor);
     }
 
     //Client side respawn
@@ -163,10 +163,7 @@ public class PlayerBehaviour : NetworkBehaviour {
     //Helper method to change all parts of the player to a certain color.
     private void ChangeColor(Color colorToChange)
     {
-        for (int i = 0; i < playerMaterial.Length; i++)
-        {
-            playerMaterial[i].color = colorToChange;
-        }
+        playerMaterial.material.color = colorToChange;
     }
 
     //Sends the health value to any listeners who might want it

@@ -393,6 +393,7 @@ GameObject:
   - component: {fileID: 95719119052672540}
   - component: {fileID: 114730487415854118}
   - component: {fileID: 114098441938806934}
+  - component: {fileID: 136557350636336120}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -918,7 +919,7 @@ Transform:
   - {fileID: 4020170014799912}
   - {fileID: 4612575527149856}
   m_Father: {fileID: 4373367448188442}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4112023506248716
 Transform:
@@ -1169,9 +1170,9 @@ Transform:
   m_LocalPosition: {x: 18.199959, y: 1, z: 5.0211563}
   m_LocalScale: {x: 0.42656758, y: 0.42656758, z: 0.42656758}
   m_Children:
+  - {fileID: 4106982904699934}
   - {fileID: 4714185608565836}
   - {fileID: 4609673257286940}
-  - {fileID: 4106982904699934}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -1278,7 +1279,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1013238978922534}
-  m_LocalRotation: {x: 0.82691187, y: -0.5622198, z: 0.00955012, w: -0.0058848048}
+  m_LocalRotation: {x: 0.8269118, y: -0.5622198, z: 0.00955012, w: -0.0058848043}
   m_LocalPosition: {x: -0.52007437, y: 0.61782277, z: 0.10310018}
   m_LocalScale: {x: 88.29933, y: 66.224556, z: 110.37411}
   m_Children: []
@@ -1366,7 +1367,7 @@ Transform:
   m_LocalScale: {x: 2.3442943, y: 2.3442943, z: 2.3442943}
   m_Children: []
   m_Father: {fileID: 4373367448188442}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4612575527149856
 Transform:
@@ -1481,7 +1482,7 @@ Transform:
   - {fileID: 4367911439038246}
   - {fileID: 4519915050534612}
   m_Father: {fileID: 4373367448188442}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 18.466133, y: 31.974354, z: 10.796444}
 --- !u!4 &4738367617039162
 Transform:
@@ -1851,6 +1852,19 @@ MonoBehaviour:
     i15: 132
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!136 &136557350636336120
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1391574777713692}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 2.07
+  m_Height: 10.27
+  m_Direction: 1
+  m_Center: {x: 0, y: 4.87, z: 0}
 --- !u!137 &137700752402051718
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
