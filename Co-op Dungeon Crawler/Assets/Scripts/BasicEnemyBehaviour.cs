@@ -95,6 +95,8 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
  
 
     //Handles the enemy touching the player. Later on this will be done by an attacking animation
+
+    //NOTE - CHANGE TO LAYERS TO STOP CONSTANT COLLISIONS
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Player"))
