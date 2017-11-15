@@ -35,6 +35,7 @@ public class PlayerBehaviour : NetworkBehaviour {
     public bool IsAnimationPlaying
     {
         get { return isAnimPlaying; }
+        set { isAnimPlaying = value; }
     }
 
     public int PlayerDamage
@@ -102,12 +103,13 @@ public class PlayerBehaviour : NetworkBehaviour {
     void RpcAttack()
     {
         //Play the sword attack animation
-        playerAnimator.Play("Sword Attack");
+        //playerAnimator.Play("Sword Attack");
         //Set whether we can play or not to true
-        isAnimPlaying = playerAnimator.IsInTransition(0);
+        //isAnimPlaying = playerAnimator.IsInTransition(0);
         //Change the bool state in the animator so it starts the sword swing.
         //This might be conflicting with the play method.
-        playerAnimator.SetBool("isSwinging", true);
+        playerAnimator.SetBool("IsSwinging", true);
+        isAnimPlaying = true;
     }
 
     public void TakeDamage(int damage)

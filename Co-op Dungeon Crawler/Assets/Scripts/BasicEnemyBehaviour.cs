@@ -129,7 +129,7 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
         {
             if (tempBehaviour.IsAnimationPlaying)
             {
-                TakeDamage(1);
+                TakeDamage(tempBehaviour.PlayerDamage);
             }
         }
     }
