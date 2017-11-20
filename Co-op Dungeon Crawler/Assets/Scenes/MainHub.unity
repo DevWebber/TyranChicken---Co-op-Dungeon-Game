@@ -15115,7 +15115,7 @@ MonoBehaviour:
   m_MinPlayers: 0
   m_LobbyPlayerPrefab: {fileID: 114625801243298730, guid: 4268cc43f879a4c40bb793d18fca668e,
     type: 2}
-  m_GamePlayerPrefab: {fileID: 1377681128473128, guid: 1777c013eaa9aa841b00e327818a32c1,
+  m_GamePlayerPrefab: {fileID: 1391574777713692, guid: 1a1a3e97f76f9ae43b6d8cc6e7f9b484,
     type: 2}
   m_LobbyScene: MainHub
   m_PlayScene: Level1

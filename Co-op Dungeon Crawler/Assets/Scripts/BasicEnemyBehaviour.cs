@@ -129,7 +129,7 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
         {
             if (tempBehaviour.IsAnimationPlaying)
             {
-                TakeDamage(1);
+                TakeDamage(tempBehaviour.PlayerDamage);
             }
         }
     }
@@ -155,6 +155,10 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
                 invulnerable = true;
                 ChangeColor(Color.red);
 
+                Vector3 forceVector = (transform.position - target.position).normalized;
+                forceVector.y = 0;
+                transform.GetComponent<Rigidbody>().AddForce(forceVector * 300f);
+
                 Invoke("ResetInvulnerable", 1f);
             }
         }
@@ -165,6 +169,8 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
     {
         invulnerable = false;
         ChangeColor(enemyColor);
+        transform.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        transform.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
     }
 
     //A very crude way of doing it, this will improve later on.

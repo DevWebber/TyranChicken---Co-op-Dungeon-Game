@@ -9,5 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/MainHub.unity
     guid: c3071a0abae9bd244b74e9042e623f11
   - enabled: 1
-    path: Assets/Scenes/Level1.unity
+    path: Assets/Scenes/Town.unity
     guid: 21059e69272e81f41b569af00fd8830e
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: a21daf6f7624f6249a6b87761c949fcd
