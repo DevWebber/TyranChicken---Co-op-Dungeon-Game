@@ -26,12 +26,15 @@ public class PlayerMovement : NetworkBehaviour {
     private Vector3 screenPosition;
     private float playerRotationAngle;
 
+    private PlayerBehaviour behaviourScript;
+
 
     void Start()
 	{
         //Assigns the navmesh and the animator
         playerAgent = GetComponent<NavMeshAgent>();
         playerAnim = GetComponent<Animator>();
+        behaviourScript = GetComponent<PlayerBehaviour>();
 
         //Start off not walking
         playerWalking = false;
@@ -45,26 +48,29 @@ public class PlayerMovement : NetworkBehaviour {
             return;
         }
 
-        //Sets our X and Y axis for movement input.
-        xAxis = Input.GetAxis("Horizontal") * Time.deltaTime * movementSpeed;
-        zAxis= Input.GetAxis("Vertical") * Time.deltaTime * movementSpeed;
+        if (!behaviourScript.IsAnimationPlaying)
+        {
 
-        //This uses the navigation mesh to move so the player is aware of walls and obstacles.
-        playerAgent.Move(new Vector3(xAxis, 0, zAxis));
+            //Sets our X and Y axis for movement input.
+            xAxis = Input.GetAxis("Horizontal") * Time.deltaTime * movementSpeed;
+            zAxis = Input.GetAxis("Vertical") * Time.deltaTime * movementSpeed;
 
-        //Gets the input of the mouse and the position of the player to screen space
-        mousePosition = Input.mousePosition;
-        screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+            //This uses the navigation mesh to move so the player is aware of walls and obstacles.
+            playerAgent.Move(new Vector3(xAxis, 0, zAxis));
 
-        mousePosition.x -= screenPosition.x;
-        mousePosition.y -= screenPosition.y;
+            //Gets the input of the mouse and the position of the player to screen space
+            mousePosition = Input.mousePosition;
+            screenPosition = Camera.main.WorldToScreenPoint(transform.position);
 
-        //Some math to get the angle between these two points
-        playerRotationAngle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
+            mousePosition.x -= screenPosition.x;
+            mousePosition.y -= screenPosition.y;
 
-        //How does this even work I don't know, please don't question it is just does.
-        transform.rotation = Quaternion.Euler(new Vector3(0, -playerRotationAngle - 270f, 0));
+            //Some math to get the angle between these two points
+            playerRotationAngle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
 
+            //How does this even work I don't know, please don't question it is just does.
+            transform.rotation = Quaternion.Euler(new Vector3(0, -playerRotationAngle - 270f, 0));
+        }
 
 
         /*Legacy code in case the above code breaks. This code rotates the player based on the direction they are facing
