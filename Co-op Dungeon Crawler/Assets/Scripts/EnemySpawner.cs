@@ -11,25 +11,36 @@ public class EnemySpawner : NetworkBehaviour {
     private GameObject enemyPrefab;
     [SerializeField]
     private int numberOfEnemies;
+    [SerializeField]
+    private int timesToSpawn;
+
+    private Transform mainSpawnPoint;
 
     private Vector3 spawnPosition;
     private Quaternion spawnRotation;
     private GameObject tempEnemy;
 
     private bool notSpawned = false;
-    private int maxAmountToSpawn = 10;
     private int numberSpawned;
 
-    //At the server start, spawn some enemies.
-	public override void OnStartServer()
+    private void OnEnable()
     {
-        SpawnEnemies();
+        mainSpawnPoint = transform.GetChild(0);
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (collider.tag == "Player")
+        {
+            notSpawned = true;
+            transform.GetComponent<BoxCollider>().enabled = false;
+        }
     }
 
     void FixedUpdate()
     {
         //Checks to see if the cooldown is off and if the fixed amount has already spawned
-        if (notSpawned && numberSpawned < maxAmountToSpawn)
+        if (notSpawned && numberSpawned < timesToSpawn)
         {
             Invoke("SpawnEnemies", 1f);
             notSpawned = false;
@@ -40,7 +51,7 @@ public class EnemySpawner : NetworkBehaviour {
     {
         for (int i = 0; i < numberOfEnemies; i++)
         {
-            spawnPosition = new Vector3(Random.Range(-8.0f, 8.0f), 0, Random.Range(92.0f, 108.0f));
+            spawnPosition = new Vector3(mainSpawnPoint.position.x + Random.Range(-8.0f, 8.0f), 0, mainSpawnPoint.position.z + Random.Range(-8.0f, 8.0f));
             spawnRotation = Quaternion.Euler(0.0f, Random.Range(0, 180f), 0.0f);
 
             tempEnemy = Instantiate(enemyPrefab, spawnPosition, spawnRotation);
@@ -48,7 +59,7 @@ public class EnemySpawner : NetworkBehaviour {
             NetworkServer.Spawn(tempEnemy);
         }
 
-        Invoke("SpawnCooldown", 10f);
+        Invoke("SpawnCooldown", 5f);
         numberSpawned++;
     }
 

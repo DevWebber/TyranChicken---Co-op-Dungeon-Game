@@ -8282,6 +8282,49 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.0100000175, y: 0.060000036, z: 0.04}
   m_Center: {x: 0.005000004, y: 0.030000066, z: 0.008806998}
+--- !u!1001 &1154919548
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4373367448188442, guid: 1a1a3e97f76f9ae43b6d8cc6e7f9b484, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 18.199959
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373367448188442, guid: 1a1a3e97f76f9ae43b6d8cc6e7f9b484, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373367448188442, guid: 1a1a3e97f76f9ae43b6d8cc6e7f9b484, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 5.0211563
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373367448188442, guid: 1a1a3e97f76f9ae43b6d8cc6e7f9b484, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373367448188442, guid: 1a1a3e97f76f9ae43b6d8cc6e7f9b484, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373367448188442, guid: 1a1a3e97f76f9ae43b6d8cc6e7f9b484, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373367448188442, guid: 1a1a3e97f76f9ae43b6d8cc6e7f9b484, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373367448188442, guid: 1a1a3e97f76f9ae43b6d8cc6e7f9b484, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 64183832955711316, guid: 1a1a3e97f76f9ae43b6d8cc6e7f9b484, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: 1a1a3e97f76f9ae43b6d8cc6e7f9b484, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1157261450 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: f8a35446889b5da4585bee9ad613c7d0, type: 3}
@@ -15115,10 +15158,10 @@ MonoBehaviour:
   m_MinPlayers: 0
   m_LobbyPlayerPrefab: {fileID: 114625801243298730, guid: 4268cc43f879a4c40bb793d18fca668e,
     type: 2}
-  m_GamePlayerPrefab: {fileID: 1377681128473128, guid: 1777c013eaa9aa841b00e327818a32c1,
+  m_GamePlayerPrefab: {fileID: 1391574777713692, guid: 1a1a3e97f76f9ae43b6d8cc6e7f9b484,
     type: 2}
   m_LobbyScene: MainHub
-  m_PlayScene: Level1
+  m_PlayScene: Town
   lobbySlots: []
 --- !u!114 &2099145348
 MonoBehaviour:

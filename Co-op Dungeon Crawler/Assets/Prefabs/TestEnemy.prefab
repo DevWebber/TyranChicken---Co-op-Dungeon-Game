@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4006354379357540}
   - component: {fileID: 33668183049281458}
   - component: {fileID: 23579402726909958}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RightArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4555742221932786}
   - component: {fileID: 33538313350164062}
   - component: {fileID: 23388923648063760}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4902624226887666}
   - component: {fileID: 33737774072994232}
   - component: {fileID: 23952288714624584}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LeftLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4105180799219144}
   - component: {fileID: 33671743290380456}
   - component: {fileID: 23881345236445706}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RightLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 114305128860266676}
   - component: {fileID: 114544747930014968}
   - component: {fileID: 114681468835189078}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TestEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 4891014963142760}
   - component: {fileID: 33114198584667814}
   - component: {fileID: 23861943145322822}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 4753394739659150}
   - component: {fileID: 33337133902211836}
   - component: {fileID: 23663732536584562}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
