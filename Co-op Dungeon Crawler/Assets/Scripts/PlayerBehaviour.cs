@@ -20,8 +20,9 @@ public class PlayerBehaviour : NetworkBehaviour {
     [SerializeField]
     private int playerDamage;
 
-    //This was used for the box model, if we have one consistent model then this isn't needed
-    private string[] playerBodyParts;
+    //Stores all possible weapon names for switching them
+    [SerializeField]
+    private string[] possibleWeapons;
 
     private bool invulnerable;
     //These two are for changing the player to red when they get hit
@@ -29,7 +30,12 @@ public class PlayerBehaviour : NetworkBehaviour {
     private Color playerColor;
     //Animator and another bool to check if the animation is playing
     private Animator playerAnimator;
+
+    private bool canAttack = true;
     private bool isAnimPlaying;
+    private bool isSecondSwing;
+    private bool isThirdSwing;
+    private bool isFinalHit;
 
     //This is not to secure as the health data
     public bool IsAnimationPlaying
@@ -44,19 +50,16 @@ public class PlayerBehaviour : NetworkBehaviour {
     }
     void Start()
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
         invulnerable = false;
         playerAnimator = GetComponent<Animator>();
-        //Everything commented is for the system that turns the player red when they get hit.
-        //This just needs to get the parts that need to be changed, find their renderer and color
-        //
-        //playerBodyParts = new string[] { "Head", "Body", "LeftArm", "RightArm", "LeftLeg", "RightLeg" };
-        //This lets us control the material of the player. Later on this will be more efficient.
+        //Gets the renderer of the player so we can use it's material and change it's color
         playerMaterial = new Renderer();
 
-        // for (int i = 0; i < playerMaterial.Length; i++)
-        // {
-        //     playerMaterial[i] = transform.Find(playerBodyParts[i]).GetComponent<Renderer>().material;
-        // }
         playerMaterial = transform.GetComponentInChildren<Renderer>();
         playerColor = playerMaterial.material.color;
 
@@ -72,9 +75,29 @@ public class PlayerBehaviour : NetworkBehaviour {
         }
 
         //Send a command to the server to attack
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && canAttack)
         {
-            CmdStartAttack();
+            if (!isSecondSwing && !isThirdSwing)
+            {
+                CmdStartAttack("IsFirstSwing");
+                isSecondSwing = true;
+            }
+            else if (isSecondSwing)
+            {
+                CancelInvoke("ResetFullAttack");
+
+                CmdStartAttack("IsSecondSwing");
+                isThirdSwing = true;
+                isSecondSwing = false;
+            }
+            else if (isThirdSwing)
+            {
+                CancelInvoke("ResetFullAttack");
+                CmdStartAttack("IsThirdSwing");
+
+                isThirdSwing = false;
+                isFinalHit = true;
+            }
         }
     }
 
@@ -84,33 +107,54 @@ public class PlayerBehaviour : NetworkBehaviour {
         {
             return;
         }
-        
-        //if (playerAnimator.IsInTransition(0) == false)
-        //{
-        //    isAnimPlaying = false;
-        //    playerAnimator.SetBool("isSwinging", false);
-        //}
     }
 
     //Start the attack
     [Command]
-    void CmdStartAttack()
+    void CmdStartAttack(string attackType)
     {
-        RpcAttack();
+        RpcAttack(attackType);
+        isAnimPlaying = true;
     }
 
     //Client side attack, once the server has verified you can actually attack
     [ClientRpc]
-    void RpcAttack()
+    void RpcAttack(string attackType)
     {
-        //Play the sword attack animation
-        //playerAnimator.Play("Sword Attack");
-        //Set whether we can play or not to true
-        //isAnimPlaying = playerAnimator.IsInTransition(0);
         //Change the bool state in the animator so it starts the sword swing.
         //This might be conflicting with the play method.
-        playerAnimator.SetBool("IsSwinging", true);
-        isAnimPlaying = true;
+        canAttack = false;
+
+        if (!isFinalHit)
+        {
+            Invoke("ResetAttack", 0.8f);
+            playerAnimator.SetBool(attackType, true);
+            Invoke("ResetFullAttack", 1.5f);
+        }
+        else
+        {
+            Invoke("ResetAttack", 1.5f);
+            playerAnimator.SetBool(attackType, true);
+            Invoke("ResetFullAttack", 1.5f);
+        }
+    }
+
+    private void ResetAttack()
+    {
+        canAttack = true;
+    }
+
+    private void ResetFullAttack()
+    {
+        isSecondSwing = false;
+        isThirdSwing = false;
+
+        playerAnimator.SetBool("IsFirstSwing", false);
+        playerAnimator.SetBool("IsSecondSwing", false);
+        playerAnimator.SetBool("IsThirdSwing", false);
+        isFinalHit = false;
+
+        isAnimPlaying = false;
     }
 
     public void TakeDamage(int damage)
