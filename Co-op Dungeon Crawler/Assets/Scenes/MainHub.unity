@@ -17257,7 +17257,7 @@ MonoBehaviour:
   m_GamePlayerPrefab: {fileID: 1148866596015826, guid: b188d2de7c0c0bc4b8579383276465d7,
     type: 2}
   m_LobbyScene: MainHub
-  m_PlayScene: Level1
+  m_PlayScene: Town
   lobbySlots: []
 --- !u!114 &2099145348
 MonoBehaviour:
