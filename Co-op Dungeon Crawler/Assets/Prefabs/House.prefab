@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4634523793007732}
   - component: {fileID: 33586186294119372}
   - component: {fileID: 23749943387573112}
+  - component: {fileID: 64030633953217146}
   m_Layer: 0
   m_Name: House
   m_TagString: Untagged
@@ -35,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1373024975501212}
   m_LocalRotation: {x: -0.56862324, y: 0.42031848, z: 0.42031854, w: 0.56862324}
-  m_LocalPosition: {x: 10.5, y: 3.2200003, z: 18.79}
+  m_LocalPosition: {x: 10.5, y: 2.76, z: 18.79}
   m_LocalScale: {x: 373.3553, y: 373.35507, z: 373.35507}
   m_Children: []
   m_Father: {fileID: 0}
@@ -84,4 +85,18 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1373024975501212}
+  m_Mesh: {fileID: 4300000, guid: 4170f4186e6e1e043936eda04f5c1aa1, type: 3}
+--- !u!64 &64030633953217146
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1373024975501212}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 4170f4186e6e1e043936eda04f5c1aa1, type: 3}
