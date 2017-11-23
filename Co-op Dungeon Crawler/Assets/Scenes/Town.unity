@@ -2330,6 +2330,8 @@ Transform:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
   m_LocalPosition: {x: 3.23, y: 3.08, z: 14.98}
 =======
   m_LocalPosition: {x: -4.8, y: 3.08, z: -1.9321136}
@@ -2340,6 +2342,12 @@ Transform:
 =======
   m_LocalPosition: {x: 3.23, y: 3.08, z: 14.98}
 >>>>>>> parent of 0cc1162... Merge branch 'master' of https://github.com/DevWebber/TyranChicken---Co-op-Dungeon-Game
+=======
+  m_LocalPosition: {x: -0.9930649, y: 3.08, z: -1.9321136}
+>>>>>>> parent of c328fe2... Minor changes
+=======
+  m_LocalPosition: {x: -0.9930649, y: 3.08, z: -1.9321136}
+>>>>>>> parent of c328fe2... Minor changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3302,6 +3310,8 @@ Transform:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
   m_LocalPosition: {x: 22.26, y: 3.08, z: -3.71}
 =======
   m_LocalPosition: {x: 2.15, y: 3.08, z: -13.910046}
@@ -3312,6 +3322,12 @@ Transform:
 =======
   m_LocalPosition: {x: 22.26, y: 3.08, z: -3.71}
 >>>>>>> parent of 0cc1162... Merge branch 'master' of https://github.com/DevWebber/TyranChicken---Co-op-Dungeon-Game
+=======
+  m_LocalPosition: {x: 13.627987, y: 3.08, z: -13.910046}
+>>>>>>> parent of c328fe2... Minor changes
+=======
+  m_LocalPosition: {x: 13.627987, y: 3.08, z: -13.910046}
+>>>>>>> parent of c328fe2... Minor changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -11034,6 +11050,8 @@ Transform:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
   m_LocalPosition: {x: 47.12, y: 3.08, z: 4.53}
 =======
   m_LocalPosition: {x: -12.18, y: 3.08, z: 4.43}
@@ -11044,6 +11062,12 @@ Transform:
 =======
   m_LocalPosition: {x: 47.12, y: 3.08, z: 4.53}
 >>>>>>> parent of 0cc1162... Merge branch 'master' of https://github.com/DevWebber/TyranChicken---Co-op-Dungeon-Game
+=======
+  m_LocalPosition: {x: -0.9880142, y: 3.08, z: -13.300041}
+>>>>>>> parent of c328fe2... Minor changes
+=======
+  m_LocalPosition: {x: -0.9880142, y: 3.08, z: -13.300041}
+>>>>>>> parent of c328fe2... Minor changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
