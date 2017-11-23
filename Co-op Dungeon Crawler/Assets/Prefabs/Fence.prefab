@@ -88,6 +88,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4195241762226280}
   - component: {fileID: 95993198213873940}
+  - component: {fileID: 65623977744471428}
   m_Layer: 0
   m_Name: Fence
   m_TagString: Untagged
@@ -114,9 +115,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1648735718994194}
-  m_LocalRotation: {x: -0.70693415, y: -0.015624155, z: -0.015624155, w: 0.70693415}
-  m_LocalPosition: {x: 19.85, y: 1.704, z: 23.27}
-  m_LocalScale: {x: 2.6366901, y: 2.6366909, z: 2.6366909}
+  m_LocalRotation: {x: -0, y: 0.00000008940695, z: 0.4575348, w: 0.88919175}
+  m_LocalPosition: {x: 1.982, y: 0.466, z: 0.02}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4390225556920326}
   - {fileID: 4927151510731742}
@@ -124,7 +125,7 @@ Transform:
   - {fileID: 4053007587964172}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -2.532}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 54.456}
 --- !u!4 &4390225556920326
 Transform:
   m_ObjectHideFlags: 1
@@ -320,6 +321,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1088189531289246}
   m_Mesh: {fileID: 4300006, guid: 2ccd60c83738b19479ccc9c9d2a1a92b, type: 3}
+--- !u!65 &65623977744471428
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1648735718994194}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.2153685, z: 0.9125832}
+  m_Center: {x: 0.000000010834119, y: -0.041365128, z: -0.043708533}
 --- !u!95 &95993198213873940
 Animator:
   serializedVersion: 3
