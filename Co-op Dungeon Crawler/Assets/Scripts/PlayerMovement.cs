@@ -16,8 +16,8 @@ public class PlayerMovement : NetworkBehaviour {
     private float xAxis;
     private float zAxis;
 
-    //Vector3 nextDirection;
-    private Animation playerAnim;
+    //The animator and a boolean for whether the player is walking or not
+    private Animator playerAnim;
     private bool playerWalking;
 
 	NavMeshAgent playerAgent;
@@ -26,42 +26,51 @@ public class PlayerMovement : NetworkBehaviour {
     private Vector3 screenPosition;
     private float playerRotationAngle;
 
+    private PlayerBehaviour behaviourScript;
+
 
     void Start()
 	{
+        //Assigns the navmesh and the animator
         playerAgent = GetComponent<NavMeshAgent>();
-        playerAnim = GetComponent<Animation>();
+        playerAnim = GetComponent<Animator>();
+        behaviourScript = GetComponent<PlayerBehaviour>();
 
+        //Start off not walking
         playerWalking = false;
 	}
 
 	void Update()
     {	
+        //if it isn't the local player, don't do anything. We only want this for the local player
         if (!isLocalPlayer)
         {
             return;
         }
 
-        //Sets our X and Y axis for movement input.
-        xAxis = Input.GetAxis("Horizontal") * Time.deltaTime * movementSpeed;
-        zAxis= Input.GetAxis("Vertical") * Time.deltaTime * movementSpeed;
+        if (!behaviourScript.IsAnimationPlaying)
+        {
 
-        //This uses the navigation mesh to move so the player is aware of walls and obstacles.
-        playerAgent.Move(new Vector3(xAxis, 0, zAxis));
+            //Sets our X and Y axis for movement input.
+            xAxis = Input.GetAxis("Horizontal") * Time.deltaTime * movementSpeed;
+            zAxis = Input.GetAxis("Vertical") * Time.deltaTime * movementSpeed;
 
-        //Gets the input of the mouse and the position of the player to screen space
-        mousePosition = Input.mousePosition;
-        screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+            //This uses the navigation mesh to move so the player is aware of walls and obstacles.
+            playerAgent.Move(new Vector3(xAxis, 0, zAxis));
 
-        mousePosition.x -= screenPosition.x;
-        mousePosition.y -= screenPosition.y;
+            //Gets the input of the mouse and the position of the player to screen space
+            mousePosition = Input.mousePosition;
+            screenPosition = Camera.main.WorldToScreenPoint(transform.position);
 
-        //Some math to get the angle between these two points
-        playerRotationAngle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
+            mousePosition.x -= screenPosition.x;
+            mousePosition.y -= screenPosition.y;
 
-        //How does this even work I don't know, please don't question it is just does.
-        transform.rotation = Quaternion.Euler(new Vector3(0, -playerRotationAngle - 90f, 0));
+            //Some math to get the angle between these two points
+            playerRotationAngle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
 
+            //How does this even work I don't know, please don't question it is just does.
+            transform.rotation = Quaternion.Euler(new Vector3(0, -playerRotationAngle - 270f, 0));
+        }
 
 
         /*Legacy code in case the above code breaks. This code rotates the player based on the direction they are facing
@@ -79,25 +88,30 @@ public class PlayerMovement : NetworkBehaviour {
     //ToFix - player walking animation.
     void LateUpdate()
     {
-        //This starts and stops the animation when the player is moving.
+        //This starts and stops the animation when the player is moving. It's very crude
         if (xAxis >= 0.01f && xAxis <= -0.01f && zAxis >= 0.01f && zAxis <= -0.01f && !playerWalking)
         {
-            playerAnim.Blend("Player Walking");
+            //playerAnim.Blend("Player Walking");
             playerWalking = true;
         }
         else if (xAxis < 0.01f && xAxis > -0.01f && zAxis < 0.01f && zAxis > -0.01f && playerWalking)
         {
-            playerAnim.Stop("Player Walking");
+            //playerAnim.Stop("Player Walking");
             playerWalking = false;
             //This doesn't work yet, the idea is when the player stops moving the animation goes back to the beginning.
-            playerAnim.Rewind("Player Walking");
+            //playerAnim.Rewind("Player Walking");
         }
     }
 
     public override void OnStartLocalPlayer()
     {
-        transform.Find("Hat").gameObject.SetActive(true);
+       //Rip the hat
+       // if (transform.Find("Hat").gameObject != null)
+       // {
+       //    transform.Find("Hat").gameObject.SetActive(true);
+       // }
 
+        //Assigns the cameras target to be this transform
         Camera.main.GetComponent<CameraFollow>().AssignTarget(transform);
     }
 
