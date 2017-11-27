@@ -4,16 +4,14 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class NetworkPlayerCustom : NetworkBehaviour {
-<<<<<<< HEAD
 
     public delegate void SendPlayerID(string id);
     public static event SendPlayerID OnSendPlayerID;
 
-=======
     /// <summary>
     /// Class to hold the players ID
-    /// </summary>
->>>>>>> master
+    /// 
+
     [SyncVar(hook = "OnPlayerIDChanged")]
     public string playerID;
     private Transform labelHolder;

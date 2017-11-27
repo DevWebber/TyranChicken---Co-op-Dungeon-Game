@@ -20,14 +20,11 @@ public class PlayerBehaviour : NetworkBehaviour {
     [SerializeField]
     private int playerDamage;
 
-<<<<<<< HEAD
     private string[] playerBodyParts;
     private string playerID;
-=======
     //Stores all possible weapon names for switching them
     [SerializeField]
     private string[] possibleWeapons;
->>>>>>> master
 
     private bool invulnerable;
     //These two are for changing the player to red when they get hit
