@@ -25,12 +25,17 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
     private bool isColliding = false;
 
     NavMeshAgent enemyAgent;
+    Animator enemyAnimator;
+    private bool enemyAttacking;
     
 	// Use this for initialization
 	void Start()
     {
         enemyMaterial = new Material[transform.childCount];
         enemyAgent = GetComponent<NavMeshAgent>();
+        enemyAnimator = GetComponent<Animator>();
+
+        //This is supposed to find all the players on the server and give every enemy a reference to each of them
 
         int clientLength = FindObjectOfType<NetworkManager>().client.connection.playerControllers.Count;
         PlayerLocations = new Transform[clientLength];
@@ -40,6 +45,7 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
             PlayerLocations[i] = FindObjectOfType<NetworkManager>().client.connection.playerControllers[i].gameObject.transform;
         }
 
+        //Handles the visual feedback of enemies being hit
         for (int i = 0; i < transform.GetChild(0).childCount; i++)
         {
             enemyMaterial[i] = transform.GetChild(0).GetChild(i).GetComponent<Renderer>().material;
@@ -48,6 +54,7 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
 
         invulnerable = false;
         hasCollided = false;
+        enemyAttacking = false;
 	}
 	
 	//Ensures the enemy has a constant target
@@ -63,12 +70,31 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
             enemyAgent.SetDestination(target.position);
             enemyAgent.speed = 5f;
 
+            if (enemyAgent.remainingDistance <= enemyAgent.stoppingDistance && !enemyAttacking)
+            {
+                enemyAttacking = true;
+                enemyAgent.speed = 0f;
+                enemyAnimator.SetBool("canAttack", true);
+                Invoke("ResetAttack", 1f);
+            }
+
             //If the player is right next to the enemy, keep taking damage. Change this if we move away from colliders
             if (enemyAgent.remainingDistance < 2f && hasCollided)
             {
                 target.gameObject.GetComponent<PlayerBehaviour>().TakeDamage(enemyDamage);
             }
         }
+
+        if (enemyAttacking)
+        {
+            transform.LookAt(target);
+        }
+    }
+
+    private void ResetAttack()
+    {
+        enemyAnimator.SetBool("canAttack", false);
+        enemyAttacking = false;
     }
 
     private Transform FindClosestPlayer()
@@ -91,6 +117,12 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
         }
 
         return closestPlayer;
+    }
+
+    [Command]
+    private void CmdAttack()
+    {
+
     }
  
 
