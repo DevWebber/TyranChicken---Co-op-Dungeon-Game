@@ -8,12 +8,13 @@ public class UIManager : NetworkBehaviour {
 
     [SyncVar(hook = "HandleOnUpdateHealth")]
     public int clientPlayerHealth;
-    [SyncVar(hook = "HandleOnUpdateHealth")]
+/*  [SyncVar(hook = "HandleOnUpdateHealth")]
     public int Player2Health;
     [SyncVar(hook = "HandleOnUpdateHealth")]
     public int Player3Health;
     [SyncVar(hook = "HandleOnUpdateHealth")]
     public int Player4Health;
+*/
 
     private string[] playerIDs;
     private bool alreadySet;
@@ -27,12 +28,17 @@ public class UIManager : NetworkBehaviour {
         PlayerBehaviour.OnSendHealthInfo += HandleOnUpdateHealth;
         NetworkPlayerCustom.OnSendPlayerID += HandleOnSendPlayerID;
 
-        playerIDs = new string[FindObjectOfType<NetworkManager>().matchSize];
+        //playerIDs = new string[FindObjectOfType<NetworkManager>().matchSize];
     }
-	void OnDisable()
+    void OnDisable()
     {
         PlayerBehaviour.OnSendHealthInfo -= HandleOnUpdateHealth;
         NetworkPlayerCustom.OnSendPlayerID -= HandleOnSendPlayerID;
+    }
+
+    void Awake()
+    {
+        playerIDs = new string[4];
     }
 
     //Takes player health and displays it as a health bar

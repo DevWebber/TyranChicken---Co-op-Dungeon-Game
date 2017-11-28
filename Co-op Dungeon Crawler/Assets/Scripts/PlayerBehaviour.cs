@@ -129,15 +129,15 @@ public class PlayerBehaviour : NetworkBehaviour {
 
         if (!isFinalHit)
         {
-            Invoke("ResetAttack", 0.8f);
+            Invoke("ResetAttack", 0.5f);
             playerAnimator.SetBool(attackType, true);
-            Invoke("ResetFullAttack", 1.5f);
+            Invoke("ResetFullAttack", 1f);
         }
         else
         {
-            Invoke("ResetAttack", 1.5f);
+            Invoke("ResetAttack", 1f);
             playerAnimator.SetBool(attackType, true);
-            Invoke("ResetFullAttack", 1.5f);
+            Invoke("ResetFullAttack", 1f);
         }
     }
 

@@ -40,9 +40,9 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
             PlayerLocations[i] = FindObjectOfType<NetworkManager>().client.connection.playerControllers[i].gameObject.transform;
         }
 
-        for (int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < transform.GetChild(0).childCount; i++)
         {
-            enemyMaterial[i] = transform.GetChild(i).GetComponent<Renderer>().material;
+            enemyMaterial[i] = transform.GetChild(0).GetChild(i).GetComponent<Renderer>().material;
         }
         enemyColor = enemyMaterial[0].color;
 
