@@ -17,7 +17,7 @@ public class UIManager : NetworkBehaviour {
 */
 
     private string[] playerIDs;
-    private bool alreadySet;
+    private bool alreadySet = false;
 
     [SerializeField]
     private Slider healthText;
@@ -60,7 +60,7 @@ public class UIManager : NetworkBehaviour {
                 alreadySet = true;
             }
 
-            Debug.Log(playerIDs[i]);
+            Debug.Log(playerID);
         }
     }
 

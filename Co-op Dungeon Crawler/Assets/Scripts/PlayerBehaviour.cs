@@ -188,6 +188,19 @@ public class PlayerBehaviour : NetworkBehaviour {
         }
     }
 
+    private void OnTriggerEnter(Collider collide)
+    {
+        if (collide.tag == "Enemy")
+        {
+            BasicEnemyBehaviour tempBehaviour = collide.GetComponentInParent<BasicEnemyBehaviour>();
+
+            if (tempBehaviour.EnemyAttacking)
+            {
+                TakeDamage(tempBehaviour.EnemyDamage);
+            }
+        }
+    }
+
     //Resets the invulnerability state
     private void ResetInvulnerable()
     {

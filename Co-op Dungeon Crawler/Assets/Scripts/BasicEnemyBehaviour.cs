@@ -27,6 +27,22 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
     NavMeshAgent enemyAgent;
     Animator enemyAnimator;
     private bool enemyAttacking;
+
+    public int EnemyDamage
+    {
+        get
+        {
+            return enemyDamage;
+        }
+    }
+    
+    public bool EnemyAttacking
+    {
+        get
+        {
+            return enemyAttacking;
+        }
+    }
     
 	// Use this for initialization
 	void Start()
@@ -34,6 +50,7 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
         enemyMaterial = new Material[transform.childCount];
         enemyAgent = GetComponent<NavMeshAgent>();
         enemyAnimator = GetComponent<Animator>();
+        enemyAgent.speed = 5f;
 
         //This is supposed to find all the players on the server and give every enemy a reference to each of them
 
@@ -68,20 +85,10 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
         if (target != null)
         {
             enemyAgent.SetDestination(target.position);
-            enemyAgent.speed = 5f;
 
             if (enemyAgent.remainingDistance <= enemyAgent.stoppingDistance && !enemyAttacking)
             {
-                enemyAttacking = true;
-                enemyAgent.speed = 0f;
-                enemyAnimator.SetBool("canAttack", true);
-                Invoke("ResetAttack", 1f);
-            }
-
-            //If the player is right next to the enemy, keep taking damage. Change this if we move away from colliders
-            if (enemyAgent.remainingDistance < 2f && hasCollided)
-            {
-                target.gameObject.GetComponent<PlayerBehaviour>().TakeDamage(enemyDamage);
+                CmdAttack();
             }
         }
 
@@ -89,12 +96,6 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
         {
             transform.LookAt(target);
         }
-    }
-
-    private void ResetAttack()
-    {
-        enemyAnimator.SetBool("canAttack", false);
-        enemyAttacking = false;
     }
 
     private Transform FindClosestPlayer()
@@ -122,23 +123,37 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
     [Command]
     private void CmdAttack()
     {
-
+        enemyAttacking = true;
+        enemyAgent.angularSpeed = 360f;
+        enemyAgent.speed = 0f;
+        enemyAnimator.SetBool("canAttack", true);
+        Invoke("CmdResetAttack", 2f);
     }
- 
+
+    [Command]
+    private void CmdResetAttack()
+    {
+        enemyAttacking = false;
+        enemyAgent.angularSpeed = 120f;
+        enemyAgent.speed = 5f;
+        enemyAnimator.SetBool("canAttack", false);
+    }
+
 
     //Handles the enemy touching the player. Later on this will be done by an attacking animation
 
     //NOTE - CHANGE TO LAYERS TO STOP CONSTANT COLLISIONS
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.CompareTag("Player"))
+    /*   private void OnCollisionEnter(Collision collision)
         {
-            tempBehaviour = collision.gameObject.GetComponentInParent<PlayerBehaviour>();
+            if (collision.collider.CompareTag("Player"))
+            {
+                tempBehaviour = collision.gameObject.GetComponentInParent<PlayerBehaviour>();
 
-            collision.gameObject.GetComponentInParent<PlayerBehaviour>().TakeDamage(enemyDamage);
-            hasCollided = true;
+                collision.gameObject.GetComponentInParent<PlayerBehaviour>().TakeDamage(enemyDamage);
+                hasCollided = true;
+            }
         }
-    }
+    */
 
     //Hurts the enemy if they are touched with a weapon that is attacking.
     private void OnTriggerEnter(Collider collision)
@@ -158,7 +173,7 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
     }
 
     //If the weapon is still stuck inside the enemy and the player trys to swing again, take damage. Another collider issue.
-    private void OnTriggerStay(Collider collision)
+/*    private void OnTriggerStay(Collider collision)
     {
         if (isColliding && tempBehaviour != null)
         {
@@ -168,6 +183,7 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
             }
         }
     }
+*/
 
     private void OnTriggerExit()
     {

@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 136216354572036138}
   m_Layer: 0
   m_Name: EnemyZombie
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -482,7 +482,7 @@ GameObject:
   - component: {fileID: 65947188067793870}
   m_Layer: 0
   m_Name: Sword
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1328,7 +1328,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1059363141589476}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 12.15584, y: 1, z: 5.4849358}
+  m_LocalPosition: {x: 17.2644, y: 1, z: 1.9537845}
   m_LocalScale: {x: 0.42656758, y: 0.42656758, z: 0.42656758}
   m_Children:
   - {fileID: 4767613989301154}
@@ -1935,7 +1935,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0.5
+  m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1
