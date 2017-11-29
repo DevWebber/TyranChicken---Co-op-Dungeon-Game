@@ -72,7 +72,6 @@ public class UIManager : NetworkBehaviour {
         for (int i = 0; i < playerIDs.Length; i++)
         {
             playerIDs[i] = FindObjectOfType<NetworkManager>().client.connection.playerControllers[i].playerControllerId.ToString();
-            Debug.Log(playerIDs[i]);
         }
 
     }

@@ -162,7 +162,6 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
         {
             tempBehaviour = collision.gameObject.GetComponentInParent<PlayerBehaviour>();
 
-            Debug.Log(tempBehaviour.IsAnimationPlaying);
             if (tempBehaviour.IsAnimationPlaying)
             {
                 TakeDamage(tempBehaviour.PlayerDamage);
