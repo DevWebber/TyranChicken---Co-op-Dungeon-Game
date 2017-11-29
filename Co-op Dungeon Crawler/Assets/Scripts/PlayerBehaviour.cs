@@ -20,6 +20,8 @@ public class PlayerBehaviour : NetworkBehaviour {
     [SerializeField]
     private int playerDamage;
 
+    private string[] playerBodyParts;
+    private string playerID;
     //Stores all possible weapon names for switching them
     [SerializeField]
     private string[] possibleWeapons;
@@ -127,15 +129,15 @@ public class PlayerBehaviour : NetworkBehaviour {
 
         if (!isFinalHit)
         {
-            Invoke("ResetAttack", 0.8f);
+            Invoke("ResetAttack", 0.5f);
             playerAnimator.SetBool(attackType, true);
-            Invoke("ResetFullAttack", 1.5f);
+            Invoke("ResetFullAttack", 1f);
         }
         else
         {
-            Invoke("ResetAttack", 1.5f);
+            Invoke("ResetAttack", 1f);
             playerAnimator.SetBool(attackType, true);
-            Invoke("ResetFullAttack", 1.5f);
+            Invoke("ResetFullAttack", 1f);
         }
     }
 
@@ -182,6 +184,19 @@ public class PlayerBehaviour : NetworkBehaviour {
 
                 //After 1.5 seconds, allow the player to get hit again
                 Invoke("ResetInvulnerable", 1.5f);
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider collide)
+    {
+        if (collide.tag == "Enemy")
+        {
+            BasicEnemyBehaviour tempBehaviour = collide.GetComponentInParent<BasicEnemyBehaviour>();
+
+            if (tempBehaviour.EnemyAttacking)
+            {
+                TakeDamage(tempBehaviour.EnemyDamage);
             }
         }
     }

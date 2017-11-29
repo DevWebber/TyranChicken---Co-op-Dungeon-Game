@@ -14,10 +14,9 @@ public class NetworkControl : NetworkLobbyManager
 
     public override void ServerChangeScene(string sceneName)
     {
-        Debug.Log("ChangeScene");
         SceneManager.LoadScene(sceneName);
 
-        Invoke("SpawnObjects", 0.2f);
+        Invoke("SpawnObjects", 0.5f);
     }
 
     public void SpawnObjects()

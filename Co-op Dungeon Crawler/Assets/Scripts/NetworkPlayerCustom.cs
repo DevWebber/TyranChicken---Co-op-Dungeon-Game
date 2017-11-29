@@ -4,12 +4,18 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class NetworkPlayerCustom : NetworkBehaviour {
+
+    public delegate void SendPlayerID(string id);
+    public static event SendPlayerID OnSendPlayerID;
+
     /// <summary>
     /// Class to hold the players ID
-    /// </summary>
+    /// 
+
     [SyncVar(hook = "OnPlayerIDChanged")]
     public string playerID;
     private Transform labelHolder;
+    private int idNumber;
 
 
     private void Awake()
@@ -17,6 +23,7 @@ public class NetworkPlayerCustom : NetworkBehaviour {
         //Find the label on the player. This is neccessary, so we know who is who.
         //The hat was for fun but this should be part of all players
         labelHolder = transform.Find("PlayerLabel");
+        idNumber = 1;
     }
 
     private void LateUpdate()
@@ -30,6 +37,7 @@ public class NetworkPlayerCustom : NetworkBehaviour {
     void CmdSetPlayerID(string newID)
     {
         playerID = newID;
+        idNumber++;
     }
 
     //When the ID changes, change the text and the current held ID value
@@ -48,7 +56,8 @@ public class NetworkPlayerCustom : NetworkBehaviour {
     public override void OnStartLocalPlayer()
     {
         //When the local player starts, give them an ID and send it to the server.
-        string localPlayerID = string.Format("Player " + netId.Value);
+        string localPlayerID = string.Format("Player " + idNumber);
         CmdSetPlayerID(localPlayerID);
+        OnSendPlayerID(localPlayerID);
     }
 }
