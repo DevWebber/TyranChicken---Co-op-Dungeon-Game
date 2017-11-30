@@ -8,13 +8,13 @@ public class UIManager : NetworkBehaviour {
 
     [SyncVar(hook = "HandleOnUpdateHealth")]
     public int clientPlayerHealth;
-/*  [SyncVar(hook = "HandleOnUpdateHealth")]
+    [SyncVar(hook = "HandleOnUpdateHealth")]
     public int Player2Health;
     [SyncVar(hook = "HandleOnUpdateHealth")]
     public int Player3Health;
     [SyncVar(hook = "HandleOnUpdateHealth")]
     public int Player4Health;
-*/
+
 
     private string[] playerIDs;
     private bool alreadySet = false;

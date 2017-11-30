@@ -123,6 +123,10 @@ public class PlayerBehaviour : NetworkBehaviour {
     [ClientRpc]
     void RpcAttack(string attackType)
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
         //Change the bool state in the animator so it starts the sword swing.
         //This might be conflicting with the play method.
         canAttack = false;

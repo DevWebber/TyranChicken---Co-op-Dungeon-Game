@@ -14,7 +14,6 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
     private int enemyDamage;
 
     private bool invulnerable;
-    private bool hasCollided;
 
     private Transform[] PlayerLocations;
 
@@ -22,7 +21,6 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
     private Material[] enemyMaterial;
     private Color enemyColor;
     private PlayerBehaviour tempBehaviour;
-    private bool isColliding = false;
 
     NavMeshAgent enemyAgent;
     Animator enemyAnimator;
@@ -70,18 +68,29 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
         enemyColor = enemyMaterial[0].color;
 
         invulnerable = false;
-        hasCollided = false;
-        enemyAttacking = false;
 	}
-	
-	//Ensures the enemy has a constant target
-	void FixedUpdate()
+
+    private void OnEnable()
     {
+        enemyAttacking = true;
+        Invoke("MinorDelay", 0.5f);
+    }
+
+    private void MinorDelay()
+    {
+        enemyAttacking = false;
+    }
+
+    //Ensures the enemy has a constant target
+    void FixedUpdate()
+    {
+        //As long as player locations exist, find the closest one
         if (PlayerLocations != null)
         {
             target = FindClosestPlayer();
         }
 
+        //Set the destination to the target, and check if we are in range to attack
         if (target != null)
         {
             enemyAgent.SetDestination(target.position);
@@ -91,13 +100,9 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
                 CmdAttack();
             }
         }
-
-        if (enemyAttacking)
-        {
-            transform.LookAt(target);
-        }
     }
 
+    //Gets the distance between itself and all the players and then picks the one thats closest. Threat system later on.
     private Transform FindClosestPlayer()
     {
         Transform closestPlayer;
@@ -166,8 +171,6 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
             {
                 TakeDamage(tempBehaviour.PlayerDamage);
             }
-
-            isColliding = true;
         }
     }
 
@@ -184,10 +187,6 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
     }
 */
 
-    private void OnTriggerExit()
-    {
-        isColliding = false;
-    }
 
     //Takes damage method, same as the player.
     public void TakeDamage(int damage)
