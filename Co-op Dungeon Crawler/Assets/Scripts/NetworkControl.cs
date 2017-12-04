@@ -14,7 +14,9 @@ public class NetworkControl : NetworkLobbyManager
 
     public override void ServerChangeScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        base.ServerChangeScene(sceneName);
+
+        //SceneManager.LoadScene(sceneName);
 
         Invoke("SpawnObjects", 0.5f);
     }
@@ -34,7 +36,7 @@ public class NetworkControl : NetworkLobbyManager
     {
         for (int i = 0; i < lobbySlots.Length; i++)
         {
-            UnityEngine.Networking.NetworkLobbyPlayer networkLobbyPlayer = lobbySlots[i];
+            NetworkLobbyPlayer networkLobbyPlayer = lobbySlots[i];
             if (!(networkLobbyPlayer == null))
             {
                 if (networkLobbyPlayer.connectionToClient == conn)
@@ -56,14 +58,5 @@ public class NetworkControl : NetworkLobbyManager
     public override void OnStopServer()
     {
         base.OnStopServer();
-    }
-
-    public override void OnServerSceneChanged(string sceneName)
-    {
-        Debug.Log("ServerChangeSceneCalled");
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
-
-        NetworkServer.SpawnObjects();
     }
 }

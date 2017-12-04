@@ -17,7 +17,7 @@ public class PlayerMovement : NetworkBehaviour {
     private float zAxis;
 
     //The animator and a boolean for whether the player is walking or not
-    private Animator playerAnim;
+    //private Animator playerAnim;
     private bool playerWalking;
 
 	NavMeshAgent playerAgent;
@@ -33,7 +33,7 @@ public class PlayerMovement : NetworkBehaviour {
 	{
         //Assigns the navmesh and the animator
         playerAgent = GetComponent<NavMeshAgent>();
-        playerAnim = GetComponent<Animator>();
+        //playerAnim = GetComponent<Animator>();
         behaviourScript = GetComponent<PlayerBehaviour>();
 
         //Start off not walking
