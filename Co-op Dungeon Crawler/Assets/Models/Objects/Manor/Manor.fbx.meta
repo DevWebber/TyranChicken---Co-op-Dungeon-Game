@@ -1,87 +1,15 @@
 fileFormatVersion: 2
-guid: 2b8e1581827e4184da89d3d48b03400e
-timeCreated: 1512399519
+guid: e567d1d5387124e40888ee8a97773047
+timeCreated: 1512401393
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
-    100000: Cube.006_MeshPart0
-    100002: Cube.006_MeshPart1
-    100004: Cube.006_MeshPart10
-    100006: Cube.006_MeshPart11
-    100008: Cube.006_MeshPart12
-    100010: Cube.006_MeshPart13
-    100012: Cube.006_MeshPart14
-    100014: Cube.006_MeshPart2
-    100016: Cube.006_MeshPart3
-    100018: Cube.006_MeshPart4
-    100020: Cube.006_MeshPart5
-    100022: Cube.006_MeshPart6
-    100024: Cube.006_MeshPart7
-    100026: Cube.006_MeshPart8
-    100028: Cube.006_MeshPart9
-    100030: //RootNode
-    400000: Cube.006_MeshPart0
-    400002: Cube.006_MeshPart1
-    400004: Cube.006_MeshPart10
-    400006: Cube.006_MeshPart11
-    400008: Cube.006_MeshPart12
-    400010: Cube.006_MeshPart13
-    400012: Cube.006_MeshPart14
-    400014: Cube.006_MeshPart2
-    400016: Cube.006_MeshPart3
-    400018: Cube.006_MeshPart4
-    400020: Cube.006_MeshPart5
-    400022: Cube.006_MeshPart6
-    400024: Cube.006_MeshPart7
-    400026: Cube.006_MeshPart8
-    400028: Cube.006_MeshPart9
-    400030: //RootNode
-    2300000: Cube.006_MeshPart0
-    2300002: Cube.006_MeshPart1
-    2300004: Cube.006_MeshPart10
-    2300006: Cube.006_MeshPart11
-    2300008: Cube.006_MeshPart12
-    2300010: Cube.006_MeshPart13
-    2300012: Cube.006_MeshPart14
-    2300014: Cube.006_MeshPart2
-    2300016: Cube.006_MeshPart3
-    2300018: Cube.006_MeshPart4
-    2300020: Cube.006_MeshPart5
-    2300022: Cube.006_MeshPart6
-    2300024: Cube.006_MeshPart7
-    2300026: Cube.006_MeshPart8
-    2300028: Cube.006_MeshPart9
-    3300000: Cube.006_MeshPart0
-    3300002: Cube.006_MeshPart1
-    3300004: Cube.006_MeshPart10
-    3300006: Cube.006_MeshPart11
-    3300008: Cube.006_MeshPart12
-    3300010: Cube.006_MeshPart13
-    3300012: Cube.006_MeshPart14
-    3300014: Cube.006_MeshPart2
-    3300016: Cube.006_MeshPart3
-    3300018: Cube.006_MeshPart4
-    3300020: Cube.006_MeshPart5
-    3300022: Cube.006_MeshPart6
-    3300024: Cube.006_MeshPart7
-    3300026: Cube.006_MeshPart8
-    3300028: Cube.006_MeshPart9
-    4300000: Cube.006_MeshPart0
-    4300002: Cube.006_MeshPart1
-    4300004: Cube.006_MeshPart2
-    4300006: Cube.006_MeshPart3
-    4300008: Cube.006_MeshPart4
-    4300010: Cube.006_MeshPart5
-    4300012: Cube.006_MeshPart6
-    4300014: Cube.006_MeshPart7
-    4300016: Cube.006_MeshPart8
-    4300018: Cube.006_MeshPart9
-    4300020: Cube.006_MeshPart10
-    4300022: Cube.006_MeshPart11
-    4300024: Cube.006_MeshPart12
-    4300026: Cube.006_MeshPart13
-    4300028: Cube.006_MeshPart14
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Cube.006
   materials:
     importMaterials: 1
     materialName: 0
