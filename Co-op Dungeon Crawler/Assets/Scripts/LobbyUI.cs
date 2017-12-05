@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using System.Net;
+using System.Net.Sockets;
 
 public class LobbyUI : MonoBehaviour {
 
@@ -22,6 +24,8 @@ public class LobbyUI : MonoBehaviour {
     private Text networkServerPort;
     [SerializeField]
     private Text clientServerPort;
+    [SerializeField]
+    private Text ipAddressText;
 
     private void FixedUpdate()
     {
@@ -61,6 +65,9 @@ public class LobbyUI : MonoBehaviour {
 
                 networkServerPort.text = "Server: port=" + manager.networkPort;
 
+                ipAddressText.text = GetLocalIPAddress();
+
+
                 //Indicates if web sockets are being used.
                 if (manager.useWebSockets)
                 {
@@ -73,6 +80,19 @@ public class LobbyUI : MonoBehaviour {
                 }
             }
         }
+    }
+
+    private string GetLocalIPAddress()
+    {
+        IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+        foreach (IPAddress ip in host.AddressList)
+        {
+            if (ip.AddressFamily == AddressFamily.InterNetwork)
+            {
+                return ip.ToString();
+            }
+        }
+        return null;
     }
 
     public void StartLobby(string startType)
