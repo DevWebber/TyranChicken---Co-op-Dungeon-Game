@@ -38,6 +38,7 @@ public class PlayerBehaviour : NetworkBehaviour {
     private bool isSecondSwing;
     private bool isThirdSwing;
     private bool isFinalHit;
+    private bool isRunning;
 
     //This is not to secure as the health data
     public bool IsAnimationPlaying
@@ -100,6 +101,23 @@ public class PlayerBehaviour : NetworkBehaviour {
                 isThirdSwing = false;
                 isFinalHit = true;
             }
+        }
+
+        if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
+        {
+            playerAnimator.SetBool("IsRunning", true);
+   /*         while (Input.GetKeyUp(KeyCode.W))
+            {
+                if(Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    break;
+                }
+
+          } */
+        }
+        else
+        {
+            playerAnimator.SetBool("IsRunning", false);
         }
     }
 
