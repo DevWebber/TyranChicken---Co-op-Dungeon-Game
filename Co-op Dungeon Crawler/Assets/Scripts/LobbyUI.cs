@@ -120,6 +120,11 @@ public class LobbyUI : MonoBehaviour {
         }
     }
 
+    public void ExitApp()
+    {
+        Application.Quit();
+    }
+
     private void SwitchCanvasGroup(string canvasGroupName)
     {
         for (int i = 0; i < canvasGroups.Length; i++)
