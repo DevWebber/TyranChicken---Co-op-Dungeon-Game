@@ -38,6 +38,9 @@ public class PlayerBehaviour : NetworkBehaviour {
     private bool isSecondSwing;
     private bool isThirdSwing;
     private bool isFinalHit;
+    private bool isRunning;
+
+    private string[] playerAnimationList;
 
     //This is not to secure as the health data
     public bool IsAnimationPlaying
@@ -65,6 +68,8 @@ public class PlayerBehaviour : NetworkBehaviour {
         playerMaterial = transform.GetComponentInChildren<Renderer>();
         playerColor = playerMaterial.material.color;
 
+        playerAnimationList = new string[] { "IsForwardRunning", "IsBackwardRunning", "IsLeftStrafing", "IsRightStrafing", "Idle", "IsFirstSwing", "IsSecondSwing", "IsThirdSwing" };
+
         //Initially sends the health of the player to whatever is keeping an eye on it
         SendHealthData();
 	}
@@ -82,18 +87,20 @@ public class PlayerBehaviour : NetworkBehaviour {
             if (!isSecondSwing && !isThirdSwing)
             {
                 CmdStartAttack("IsFirstSwing");
+                //PlayerSwitchAnimation("IsFirstSwing");
                 isSecondSwing = true;
             }
             else if (isSecondSwing)
             {
                 CancelInvoke("ResetFullAttack");
-
+                //PlayerSwitchAnimation("IsSecondSwing");
                 CmdStartAttack("IsSecondSwing");
                 isThirdSwing = true;
                 isSecondSwing = false;
             }
             else if (isThirdSwing)
             {
+                //PlayerSwitchAnimation("IsThirdSwing");
                 CancelInvoke("ResetFullAttack");
                 CmdStartAttack("IsThirdSwing");
 
@@ -101,6 +108,35 @@ public class PlayerBehaviour : NetworkBehaviour {
                 isFinalHit = true;
             }
         }
+        if (Input.GetKey(KeyCode.Mouse0) != true)
+        {
+            if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
+            {
+
+                if (Input.GetKey(KeyCode.W))
+                {
+                    PlayerSwitchAnimation("IsForwardRunning");
+                }
+                if (Input.GetKey(KeyCode.A))
+                {
+                    PlayerSwitchAnimation("IsLeftStrafing");
+                }
+                if (Input.GetKey(KeyCode.D))
+                {
+                    PlayerSwitchAnimation("IsRightStrafing");
+                }
+                if (Input.GetKey(KeyCode.S))
+                {
+                    PlayerSwitchAnimation("IsBackwardRunning");
+                }
+
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D))
+            {
+                PlayerSwitchAnimation("Idle");
+            }
     }
 
     void FixedUpdate()
@@ -141,7 +177,7 @@ public class PlayerBehaviour : NetworkBehaviour {
         {
             Invoke("ResetAttack", 1f);
             playerAnimator.SetBool(attackType, true);
-            Invoke("ResetFullAttack", 1f);
+            Invoke("ResetFullAttack", 2f);
         }
     }
 
@@ -235,6 +271,21 @@ public class PlayerBehaviour : NetworkBehaviour {
         if (OnSendHealthInfo != null)
         {
             OnSendHealthInfo(playerHealth);
+        }
+    }
+
+    private void PlayerSwitchAnimation(string animationName)
+    {
+        for (int i = 0; i < playerAnimationList.Length; i++)
+        {
+            if (playerAnimationList[i] == animationName)
+            {
+                playerAnimator.SetBool(playerAnimationList[i], true);
+            }
+            else
+            {
+                playerAnimator.SetBool(playerAnimationList[i], false);
+            }
         }
     }
 
