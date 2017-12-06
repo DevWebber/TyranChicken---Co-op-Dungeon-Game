@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using System.Net;
+using System.Net.Sockets;
 
 public class NetworkControl : NetworkLobbyManager
 {
@@ -11,6 +13,23 @@ public class NetworkControl : NetworkLobbyManager
     /// </summary>
     /// <param name="sceneName"></param>
     /// 
+
+    public static NetworkControl instance = null;
+
+    private void Awake()
+    {
+        serverBindAddress = GetLocalIPAddress();
+
+        //Means there can only be one of this script at any time;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public override void ServerChangeScene(string sceneName)
     {
@@ -58,5 +77,21 @@ public class NetworkControl : NetworkLobbyManager
     public override void OnStopServer()
     {
         base.OnStopServer();
+    }
+
+    private string GetLocalIPAddress()
+    {
+        string ipAddress = "";
+
+        IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+        foreach (IPAddress ip in host.AddressList)
+        {
+            if (ip.AddressFamily == AddressFamily.InterNetwork)
+            {
+                ipAddress = ip.ToString();
+            }
+        }
+
+        return ipAddress;
     }
 }

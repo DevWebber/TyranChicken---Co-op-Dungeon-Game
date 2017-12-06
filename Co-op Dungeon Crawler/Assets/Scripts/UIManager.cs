@@ -15,12 +15,20 @@ public class UIManager : NetworkBehaviour {
     [SyncVar(hook = "HandleOnUpdateHealth")]
     public int Player4Health;
 
+    [SerializeField]
+    private CanvasGroup objectiveCanvasGroup;
+    [SerializeField]
+    private CanvasGroup pauseMenuCanvasGroup;
+    private bool isObjectivesOpen = true;
+    private bool isPauseOpen = false;
 
     private string[] playerIDs;
     private bool alreadySet = false;
 
     [SerializeField]
     private Slider healthText;
+    [SerializeField]
+    private Text objectiveText;
 
 
     void OnEnable()
@@ -39,6 +47,50 @@ public class UIManager : NetworkBehaviour {
     void Awake()
     {
         playerIDs = new string[4];
+        objectiveText.text = "-Find the Manor and stop whatever is attacking the Town";
+    }
+
+    //Opens the objectives and the pause menu by keypress;
+    private void FixedUpdate()
+    {
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            if (!isObjectivesOpen)
+            {
+                objectiveCanvasGroup.interactable = true;
+                objectiveCanvasGroup.blocksRaycasts = true;
+                objectiveCanvasGroup.alpha = 1;
+
+                isObjectivesOpen = true;
+            }
+            else
+            {
+                objectiveCanvasGroup.interactable = false;
+                objectiveCanvasGroup.blocksRaycasts = false;
+                objectiveCanvasGroup.alpha = 0;
+
+                isObjectivesOpen = false;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (!isPauseOpen)
+            {
+                pauseMenuCanvasGroup.interactable = true;
+                pauseMenuCanvasGroup.blocksRaycasts = true;
+                pauseMenuCanvasGroup.alpha = 1;
+
+                isPauseOpen = true;
+            }
+            else
+            {
+                pauseMenuCanvasGroup.interactable = false;
+                pauseMenuCanvasGroup.blocksRaycasts = false;
+                pauseMenuCanvasGroup.alpha = 0;
+
+                isPauseOpen = false;
+            }
+        }
     }
 
     //Takes player health and displays it as a health bar
@@ -48,6 +100,7 @@ public class UIManager : NetworkBehaviour {
         healthText.value = (float)clientPlayerHealth / 100;
     }
 
+    //This is meant to get a player ID, and add it to the array.
     private void HandleOnSendPlayerID(string playerID)
     {
         alreadySet = false;
@@ -71,8 +124,13 @@ public class UIManager : NetworkBehaviour {
 
         for (int i = 0; i < playerIDs.Length; i++)
         {
-            playerIDs[i] = FindObjectOfType<NetworkManager>().client.connection.playerControllers[i].playerControllerId.ToString();
+            playerIDs[i] = FindObjectOfType<NetworkControl>().client.connection.playerControllers[i].playerControllerId.ToString();
         }
 
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

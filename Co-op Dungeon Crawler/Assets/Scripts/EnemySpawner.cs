@@ -14,6 +14,8 @@ public class EnemySpawner : NetworkBehaviour {
     [SerializeField]
     private int timesToSpawn;
 
+    public bool finalSpawner;
+
     private Transform mainSpawnPoint;
 
     private Vector3 spawnPosition;
@@ -21,7 +23,8 @@ public class EnemySpawner : NetworkBehaviour {
     private GameObject tempEnemy;
 
     private bool notSpawned = false;
-    private int numberSpawned;
+    private bool finishedSpawning = false;
+    private int numberSpawned = 0;
 
     private void OnEnable()
     {
@@ -34,6 +37,13 @@ public class EnemySpawner : NetworkBehaviour {
         {
             notSpawned = true;
             transform.GetComponent<BoxCollider>().enabled = false;
+
+            //If this is the final spawner, trigger the boss trigger script.
+            if (finalSpawner)
+            {
+                BossTrigger tempBossTrigger = transform.parent.GetChild(0).GetComponent<BossTrigger>();
+                tempBossTrigger.StartBossFight();
+            }
         }
     }
 
@@ -44,6 +54,11 @@ public class EnemySpawner : NetworkBehaviour {
         {
             Invoke("SpawnEnemies", 1f);
             notSpawned = false;
+        }
+
+        if (numberSpawned == timesToSpawn)
+        {
+            finishedSpawning = true;
         }
     }
 
@@ -66,5 +81,17 @@ public class EnemySpawner : NetworkBehaviour {
     private void SpawnCooldown()
     {
         notSpawned = true;
+    }
+
+    public bool FinishedSpawning
+    {
+        get
+        {
+            return finishedSpawning;
+        }
+        set
+        {
+            finishedSpawning = value;
+        }
     }
 }

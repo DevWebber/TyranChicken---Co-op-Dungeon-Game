@@ -48,16 +48,16 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
         enemyMaterial = new Material[transform.childCount];
         enemyAgent = GetComponent<NavMeshAgent>();
         enemyAnimator = GetComponent<Animator>();
-        enemyAgent.speed = 5f;
+        enemyAgent.speed = 10f;
 
         //This is supposed to find all the players on the server and give every enemy a reference to each of them
 
-        int clientLength = FindObjectOfType<NetworkManager>().client.connection.playerControllers.Count;
+        int clientLength = FindObjectOfType<NetworkControl>().client.connection.playerControllers.Count;
         PlayerLocations = new Transform[clientLength];
 
         for (int i = 0; i < clientLength;  i++)
         {
-            PlayerLocations[i] = FindObjectOfType<NetworkManager>().client.connection.playerControllers[i].gameObject.transform;
+            PlayerLocations[i] = FindObjectOfType<NetworkControl>().client.connection.playerControllers[i].gameObject.transform;
         }
 
         //Handles the visual feedback of enemies being hit
@@ -68,6 +68,10 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
         enemyColor = enemyMaterial[0].color;
 
         invulnerable = false;
+
+        //Destroys enemy if alive too long
+
+        Destroy(gameObject, 20f);
 	}
 
     private void OnEnable()

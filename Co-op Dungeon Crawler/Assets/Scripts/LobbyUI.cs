@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
-using System.Net;
-using System.Net.Sockets;
+using UnityEngine.SceneManagement;
 
 public class LobbyUI : MonoBehaviour {
 
@@ -65,8 +64,7 @@ public class LobbyUI : MonoBehaviour {
 
                 networkServerPort.text = "Server: port=" + manager.networkPort;
 
-                ipAddressText.text = GetLocalIPAddress();
-
+                ipAddressText.text = "IP Address: " + manager.serverBindAddress;
 
                 //Indicates if web sockets are being used.
                 if (manager.useWebSockets)
@@ -80,19 +78,6 @@ public class LobbyUI : MonoBehaviour {
                 }
             }
         }
-    }
-
-    private string GetLocalIPAddress()
-    {
-        IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
-        foreach (IPAddress ip in host.AddressList)
-        {
-            if (ip.AddressFamily == AddressFamily.InterNetwork)
-            {
-                return ip.ToString();
-            }
-        }
-        return null;
     }
 
     public void StartLobby(string startType)
@@ -109,11 +94,9 @@ public class LobbyUI : MonoBehaviour {
         }
         else if (startType == "Client")
         {
+            manager.networkAddress = inputAddress.text;
             //LAN Client
             manager.StartClient();
-            //Do some checks here
-            manager.networkAddress = inputAddress.text;
-            //
         }
     }
 
@@ -127,16 +110,13 @@ public class LobbyUI : MonoBehaviour {
 
     public void StopLobby(string endType)
     {
-        if (manager.IsClientConnected())
+        if (endType == "Host")
         {
-            if (endType == "Host")
-            {
-                manager.StopHost();
-            }
-            if (endType == "Server")
-            {
-                manager.StopServer();
-            }
+            manager.StopHost();
+        }
+        if (endType == "Server")
+        {
+            manager.StopServer();
         }
     }
 
