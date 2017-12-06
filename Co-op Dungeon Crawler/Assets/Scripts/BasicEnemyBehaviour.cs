@@ -71,7 +71,7 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
 
         //Destroys enemy if alive too long
 
-        Destroy(gameObject, 20f);
+        Destroy(gameObject, 60f);
 	}
 
     private void OnEnable()
