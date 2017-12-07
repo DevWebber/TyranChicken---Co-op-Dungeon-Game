@@ -17,14 +17,17 @@ public class NetworkPlayerCustom : NetworkBehaviour {
     private Transform labelHolder;
     private int idNumber;
 
+    private NetworkControl manager;
+
 
     private void Awake()
     {
         //Find the label on the player. This is neccessary, so we know who is who.
         //The hat was for fun but this should be part of all players
         labelHolder = transform.Find("PlayerLabel");
-        idNumber = 1;
+        manager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkControl>();
     }
+    
 
     private void LateUpdate()
     {

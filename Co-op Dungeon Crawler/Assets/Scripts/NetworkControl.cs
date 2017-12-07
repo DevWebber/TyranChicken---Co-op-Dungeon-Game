@@ -15,6 +15,8 @@ public class NetworkControl : NetworkLobbyManager
     /// 
 
     public static NetworkControl instance = null;
+    private List<Transform> playerList;
+    private GameObject[] players;
 
     private void Awake()
     {
@@ -29,6 +31,14 @@ public class NetworkControl : NetworkLobbyManager
         {
             Destroy(gameObject);
         }
+
+ /*     playerList = new List<Transform>();
+        players = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < players.Length; i++)
+        {
+            playerList.Add(players[i].transform);
+        }
+ */
     }
 
     public override void ServerChangeScene(string sceneName)
@@ -71,7 +81,6 @@ public class NetworkControl : NetworkLobbyManager
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
         base.OnServerAddPlayer(conn, playerControllerId);
-
     }
 
     public override void OnStopServer()
@@ -93,5 +102,15 @@ public class NetworkControl : NetworkLobbyManager
         }
 
         return ipAddress;
+    }
+
+    private void OnPlayerConnected(NetworkPlayer player)
+    {
+
+        playerList.Clear();
+    }
+    private void OnPlayerDisconnected(NetworkPlayer player)
+    {
+        
     }
 }
