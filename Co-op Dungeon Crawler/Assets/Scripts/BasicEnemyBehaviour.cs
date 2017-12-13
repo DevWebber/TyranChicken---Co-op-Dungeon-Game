@@ -235,7 +235,7 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
 
     private void ChangeColor(Color colorToChange)
     {
-        for (int i = 0; i < enemyMaterial.Length; i++)
+        for (int i = 0; i < enemyMaterial.Length - 1; i++)
         {
             enemyMaterial[i].color = colorToChange;
         }
