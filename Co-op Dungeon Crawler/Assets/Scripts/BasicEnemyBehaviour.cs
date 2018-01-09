@@ -210,7 +210,7 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
 
                 Vector3 forceVector = (transform.position - target.position).normalized;
                 forceVector.y = 0;
-                transform.GetComponent<Rigidbody>().AddForce(forceVector * 300f);
+                transform.GetComponent<Rigidbody>().AddForce(forceVector * 3000f);
 
                 Invoke("ResetInvulnerable", 1f);
             }
