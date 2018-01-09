@@ -19,8 +19,9 @@ public class PlayerMovement : NetworkBehaviour {
     //The animator and a boolean for whether the player is walking or not
     //private Animator playerAnim;
     private bool playerWalking;
+    private bool canMove = false;
 
-	NavMeshAgent playerAgent;
+    NavMeshAgent playerAgent;
 
     private Vector3 mousePosition;
     private Vector3 screenPosition;
@@ -38,6 +39,8 @@ public class PlayerMovement : NetworkBehaviour {
 
         //Start off not walking
         playerWalking = false;
+
+        StartCoroutine(StartingTimer());
 	}
 
 	void Update()
@@ -48,7 +51,7 @@ public class PlayerMovement : NetworkBehaviour {
             return;
         }
 
-        if (!behaviourScript.IsAnimationPlaying)
+        if (!behaviourScript.IsAnimationPlaying && canMove)
         {
 
             //Sets our X and Y axis for movement input.
@@ -115,6 +118,12 @@ public class PlayerMovement : NetworkBehaviour {
         Camera.main.GetComponent<CameraFollow>().AssignTarget(transform);
     }
 
+    IEnumerator StartingTimer()
+    {
+        canMove = false;
+        yield return new WaitForSeconds(17);
+        canMove = true;
+    }
 }
 
 
