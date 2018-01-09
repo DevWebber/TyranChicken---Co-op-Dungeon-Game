@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class PlayerBehaviour : NetworkBehaviour {
     /// <summary>
@@ -252,13 +253,15 @@ public class PlayerBehaviour : NetworkBehaviour {
     [ClientRpc]
     void RpcRespawn()
     {
-        //If this is the local player
-        if (isLocalPlayer)
-        {
-            playerHealth = 100;
-            transform.position = Vector3.zero;
-        }
+        CmdRespawn();
     }
+
+    [Command]
+    void CmdRespawn()
+    {
+        SceneManager.LoadScene(SceneManager.GetSceneByName("Town").name);
+    }
+
     //Helper method to change all parts of the player to a certain color.
     private void ChangeColor(Color colorToChange)
     {
