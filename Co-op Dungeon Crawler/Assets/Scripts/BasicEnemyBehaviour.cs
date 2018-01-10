@@ -91,7 +91,7 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
         //As long as player locations exist, find the closest one
         if (PlayerLocations != null)
         {
-            target = FindClosestPlayer();
+            target = CmdFindClosestPlayer();
         }
 
         //Set the destination to the target, and check if we are in range to attack
@@ -107,7 +107,8 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
     }
 
     //Gets the distance between itself and all the players and then picks the one thats closest. Threat system later on.
-    private Transform FindClosestPlayer()
+    [Command]
+    private Transform CmdFindClosestPlayer()
     {
         Transform closestPlayer;
         float tempDistance;
@@ -147,7 +148,6 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
         enemyAgent.speed = 5f;
         enemyAnimator.SetBool("canAttack", false);
     }
-
 
     //Handles the enemy touching the player. Later on this will be done by an attacking animation
 

@@ -33,6 +33,7 @@ public class PlayerBehaviour : NetworkBehaviour {
     private Color playerColor;
     //Animator and another bool to check if the animation is playing
     private Animator playerAnimator;
+    private NetworkControl controller;
 
     private bool canAttack = true;
     private bool isAnimPlaying;
@@ -65,6 +66,8 @@ public class PlayerBehaviour : NetworkBehaviour {
         playerAnimator = GetComponent<Animator>();
         //Gets the renderer of the player so we can use it's material and change it's color
         playerMaterial = new Renderer();
+
+        controller = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkControl>();
 
         playerMaterial = transform.GetComponentInChildren<Renderer>();
         playerColor = playerMaterial.material.color;
@@ -259,7 +262,7 @@ public class PlayerBehaviour : NetworkBehaviour {
     [Command]
     void CmdRespawn()
     {
-        SceneManager.LoadScene(SceneManager.GetSceneByName("Town").name);
+        controller.StopHost();
     }
 
     //Helper method to change all parts of the player to a certain color.
