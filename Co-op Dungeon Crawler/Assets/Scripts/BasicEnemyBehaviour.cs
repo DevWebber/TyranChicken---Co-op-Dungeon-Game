@@ -91,7 +91,7 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
         //As long as player locations exist, find the closest one
         if (PlayerLocations != null)
         {
-            target = CmdFindClosestPlayer();
+            target = FindClosestPlayer();
         }
 
         //Set the destination to the target, and check if we are in range to attack
@@ -107,8 +107,7 @@ public class BasicEnemyBehaviour : NetworkBehaviour {
     }
 
     //Gets the distance between itself and all the players and then picks the one thats closest. Threat system later on.
-    [Command]
-    private Transform CmdFindClosestPlayer()
+    private Transform FindClosestPlayer()
     {
         Transform closestPlayer;
         float tempDistance;
