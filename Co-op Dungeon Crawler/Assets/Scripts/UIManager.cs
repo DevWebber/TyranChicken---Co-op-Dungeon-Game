@@ -112,8 +112,6 @@ public class UIManager : NetworkBehaviour {
                 playerIDs[i] = playerID;
                 alreadySet = true;
             }
-
-            Debug.Log(playerID);
         }
     }
 

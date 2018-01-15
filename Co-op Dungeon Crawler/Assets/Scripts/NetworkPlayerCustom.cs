@@ -19,6 +19,8 @@ public class NetworkPlayerCustom : NetworkBehaviour {
 
     private NetworkControl manager;
 
+    private GameObject[] PlayerIDs;
+
 
     private void Awake()
     {
@@ -26,8 +28,17 @@ public class NetworkPlayerCustom : NetworkBehaviour {
         //The hat was for fun but this should be part of all players
         labelHolder = transform.Find("PlayerLabel");
         manager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkControl>();
+
+        int clientLength = FindObjectOfType<NetworkControl>().client.connection.playerControllers.Count;
+        PlayerIDs = new GameObject[clientLength];
+
+        for (int i = 0; i < clientLength; i++)
+        {
+            PlayerIDs[i] = FindObjectOfType<NetworkControl>().client.connection.playerControllers[i].gameObject;
+        }
+
     }
-    
+
 
     private void LateUpdate()
     {
@@ -58,6 +69,13 @@ public class NetworkPlayerCustom : NetworkBehaviour {
 
     public override void OnStartLocalPlayer()
     {
+        for (int i = 0; i < PlayerIDs.Length; i++)
+        {
+            if (transform == PlayerIDs[i].transform)
+            {
+                idNumber = i;
+            }
+        }
         //When the local player starts, give them an ID and send it to the server.
         string localPlayerID = string.Format("Player " + idNumber);
         CmdSetPlayerID(localPlayerID);

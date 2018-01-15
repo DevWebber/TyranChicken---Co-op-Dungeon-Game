@@ -27,7 +27,7 @@ public class BossTrigger : MonoBehaviour {
     private bool barrierLifted = false;
     private bool notAlreadyLifted = false;
 
-	void Awake()
+	void LateAwake()
     {
         controller = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkControl>();
 	}
